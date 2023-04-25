@@ -1,0 +1,156 @@
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
+const UserRegistration = () => {
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState("");
+
+  const generateUserId = () => {
+    setUserId(Math.floor(Math.random() * 100000000 + 1));
+  };
+
+  const handleRegistration = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const address = form.address.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const userType = form.userType.value;
+    const phone = form.phone.value;
+    const userObj = {
+      name,
+      address,
+      email,
+      password,
+      userType,
+      phone,
+    };
+    console.log(userObj);
+
+    if (password.length < 6) {
+      setError(`Your Password must be 6 character`);
+      return;
+    } else {
+      setError("");
+      // registration
+      fetch("http://localhost:4000/api/v1/usersignup", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userObj),
+      })
+        .then((result) => {
+          console.log(result);
+          form.reset();
+          toast.success("User created Successfully");
+        })
+        .catch((error) => {
+          setError("Registration Failed!Try Again..");
+        });
+    }
+  };
+  return (
+    <div className="hero min-h-screen bg-base-100">
+      <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="text-center lg:text-left">
+          <figure>
+            <img
+              width="400px"
+              src="https://i.ibb.co/VTw5prg/signup.jpg"
+              alt="userRegister"
+            />
+          </figure>
+        </div>
+        <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
+          <form onSubmit={handleRegistration} className="card-body">
+            <h1 className="text-5xl font-bold text-center text-primary">
+              User Registration
+            </h1>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">User Name</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="User Name"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Enter Address</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter Address"
+                name="address"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Enter Email</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter Email"
+                name="email"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Enter Password</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter Password"
+                name="password"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Enter UserType</span>
+              </label>
+              <select name="userType" className="select select-bordered w-full">
+                <option disabled>Select the user type</option>
+                <option value={"Manufacturer"}>Manufacturer</option>
+                <option value={"Distributor"}>Distributor</option>
+                <option value={"Retailer"}>Retailer</option>
+                <option value={"TransportAgency"}>TransportAgency</option>
+              </select>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Enter Phone</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter Phone"
+                name="phone"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control mt-6">
+              <button className="btn btn-primary">Add to System</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UserRegistration;
