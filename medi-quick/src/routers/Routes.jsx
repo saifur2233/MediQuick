@@ -25,6 +25,7 @@ import RetailerViewDrugRequest from "../pages/UserDashboard/Retailer/RetailerVie
 import RetailerViewSendDrugReq from "../pages/UserDashboard/Retailer/RetailerViewSendDrugReq";
 import TransportAgencyViewDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencyViewDrugReq";
 import TransportAgencyViewSendDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencyViewSendDrugReq";
+import ManufacturerSendDrug from "../pages/UserDashboard/Manufacturer/ManufacturerSendDrug";
 
 export const router = createBrowserRouter([
   {
@@ -104,6 +105,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/manuViewDrugDetails",
         element: <ManuViewDrugDetails></ManuViewDrugDetails>,
+      },
+      {
+        path: "/dashboard/ManuSendDrug",
+        element: <ManufacturerSendDrug></ManufacturerSendDrug>,
       },
       {
         path: "/dashboard/manuViewDrugRequest",

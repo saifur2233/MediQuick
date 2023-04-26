@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAsync");
 const User = require("../models/User");
+//let { PythonShell } = require("python-shell");
 
 exports.adminSignup = catchAsync(async (req, res, next) => {
   try {
@@ -95,6 +96,9 @@ exports.userSignup = catchAsync(async (req, res, next) => {
   try {
     const { name, address, email, password, userType, phone } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
+    const digitalSignature =
+      "fc258e5e48abd8edf7a227b1525766f4906a851ee6ca24f103dd70d194d04094";
+
     const user = new User({
       _id: new mongoose.Types.ObjectId(),
       name,
@@ -103,6 +107,7 @@ exports.userSignup = catchAsync(async (req, res, next) => {
       password: hashedPassword,
       userType,
       phone,
+      digitalSignature,
     });
     await user.save();
     res.status(200).json({

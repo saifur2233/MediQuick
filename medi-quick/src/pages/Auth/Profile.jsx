@@ -1,14 +1,22 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Profile = () => {
+  const item =
+    " You've been selected for a chance to get one year of subscription to";
   const navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
   const handleLogout = () => {
     logout();
     navigate("/");
     window.location.reload();
+  };
+
+  const handleSignatureCopy = () => {
+    navigator.clipboard.writeText(user[0]?.digitalSignature);
+    toast.success("Copy to clipboard");
   };
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -33,12 +41,42 @@ const Profile = () => {
                 <p>Address: {user[0]?.address}</p>
                 <p>Phone Number: {user[0]?.phone}</p>
                 <div className="card-actions justify-end py-4">
-                  <button onClick={handleLogout} className="btn btn-primary">
-                    LogOut
-                  </button>
+                  <div className="flex justify-center gap-3">
+                    <button onClick={handleLogout} className="btn btn-success">
+                      Update Profile
+                    </button>
+                    <button onClick={handleLogout} className="btn btn-primary">
+                      LogOut
+                    </button>
+                    <label htmlFor="my-modal-3" className="btn btn-secondary">
+                      Signature
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box relative">
+          <label
+            htmlFor="my-modal-3"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          <h3 className="text-lg font-bold">Your Digital Signature</h3>
+          <p className="py-4">{user[0]?.digitalSignature}</p>
+          <div className="tooltip" data-tip="Copy Digital Signature">
+            <label
+              htmlFor="my-modal-3"
+              onClick={handleSignatureCopy}
+              className="btn btn-accent"
+            >
+              Copy to clipboard
+            </label>
           </div>
         </div>
       </div>

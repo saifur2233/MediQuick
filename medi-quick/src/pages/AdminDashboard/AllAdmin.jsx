@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../shared/Loading/Loading";
+import { toast } from "react-hot-toast";
 
 const AllAdmin = () => {
-  const [deletingAdmin, setDeletingAdmin] = useState(null);
-  const closeModal = () => {
-    setDeletingAdmin(null);
-  };
-
   const {
     data: allAdmin = [],
     isLoading,
@@ -25,9 +21,15 @@ const AllAdmin = () => {
     return <Loading></Loading>;
   }
 
-  const hnadleDeleteUser = (admin) => {
-    console.log(admin);
+  const hnadleDeleteUser = (user) => {
+    fetch(`http://localhost:4000/api/v1/admin/user/${user._id}`, {
+      method: "DELETE",
+    }).then((data) => {
+      toast.success("Admin deleted succesfuly");
+      refetch();
+    });
   };
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-center text-secondary py-6">
@@ -58,7 +60,25 @@ const AllAdmin = () => {
                 <td>{admin.userType}</td>
                 <td>{admin.phone}</td>
                 <td>
-                  <label className="btn btn-outline btn-error">Delete</label>
+                  <label
+                    onClick={() => hnadleDeleteUser(admin)}
+                    className="btn btn-outline btn-error"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </label>
                 </td>
               </tr>
             ))}

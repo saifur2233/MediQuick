@@ -56,7 +56,7 @@ const UserContext = ({ children }) => {
   };
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   const authInfo = {
     user,

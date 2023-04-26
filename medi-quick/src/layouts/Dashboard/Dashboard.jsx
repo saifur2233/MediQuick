@@ -27,7 +27,7 @@ const Dashboard = () => {
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
             <li>
-              <Link to="/dashboard/profile">Profile</Link>
+              <Link to="/dashboard">Profile</Link>
             </li>
             {user[0]?.userType === "SuperAdmin" && (
               <>
@@ -70,6 +70,9 @@ const Dashboard = () => {
                   <Link to="/dashboard/manuViewDrugDetails">
                     View Drug Details
                   </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/ManuSendDrug">Send Drugs</Link>
                 </li>
                 <li>
                   <Link to="/dashboard/manuViewDrugRequest">

@@ -9,6 +9,7 @@ const UserModelSchema = new Schema({
   password: String,
   userType: String,
   phone: String,
+  digitalSignature: String,
 });
 
 const UserModel = mongoose.model("User", UserModelSchema);

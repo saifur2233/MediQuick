@@ -78,7 +78,7 @@ const AddDrugsMenufacturer = () => {
         <div className="flex justify-center gap-12 py-10">
           <form
             onSubmit={handleAddDrug}
-            className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+            className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100"
           >
             <div className="card-body">
               <div className="form-control">
