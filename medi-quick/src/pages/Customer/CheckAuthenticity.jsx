@@ -33,7 +33,7 @@ const CheckAuthenticity = () => {
             a id nisi.
           </p>
         </div>
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100 border-1 border-y-4 rounded-b-lg border-primary hover:border-4">
           <div className="card-body">
             {drug.length === 0 ? (
               <>
@@ -44,8 +44,12 @@ const CheckAuthenticity = () => {
               </>
             ) : (
               <>
-                <h2 className="card-title">Drug Name: {drug[0]?.drugName}</h2>
-                <p className="text-green-500 bg-neutral">Status: Authentic</p>
+                <h2 className="card-title text-2xl">
+                  Drug Name: {drug[0]?.drugName}
+                </h2>
+                <p className="text-green-500 font-bold bg-neutral py-2">
+                  Status: Authentic
+                </p>
                 <p>Drug Code: {drug[0]?.drugCode}</p>
                 <p>Dosage: {drug[0]?.drugDosage}</p>
                 <div className="card-actions justify-end">

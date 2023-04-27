@@ -22,21 +22,27 @@ const ResultContainerTable = ({ data }) => {
     <table className={"Qrcode-result-table"}>
       <thead>
         <tr>
-          <td className="font-bold">#</td>
-          <td className="font-bold">Format</td>
-          <td className="font-bold">Decoded Text</td>
+          <th className="font-bold">#</th>
+          <th className="font-bold">Format</th>
+          <th className="font-bold">Decoded Text</th>
+          <th className="font-bold">Action</th>
         </tr>
       </thead>
       <tbody>
         {results.map((result, i) => {
-          console.log(result);
+          console.log("Hello ", result);
           return (
             <tr key={i}>
               <td>{i + 1}</td>
-              <td className="px-6">
-                <Link>{result.result.format.formatName}</Link>
-              </td>
+              <td className="px-6">{result.result.format.formatName}</td>
               <td>{result.decodedText}</td>
+              <td>
+                <Link to={`/customer/${result.decodedText}`}>
+                  <button className="btn btn-sm                                                                                          first-line: btn-primary">
+                    Check Authenticity
+                  </button>
+                </Link>
+              </td>
             </tr>
           );
         })}

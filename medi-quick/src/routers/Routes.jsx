@@ -22,10 +22,16 @@ import ManuViewDrugRequest from "../pages/UserDashboard/Manufacturer/ManuViewDru
 import DistributorViewDrugRequest from "../pages/UserDashboard/Distributor/DistributorViewDrugRequest";
 import DistributorViewSendDrugReq from "../pages/UserDashboard/Distributor/DistributorViewSendDrugReq";
 import RetailerViewDrugRequest from "../pages/UserDashboard/Retailer/RetailerViewDrugRequest";
-import RetailerViewSendDrugReq from "../pages/UserDashboard/Retailer/RetailerViewSendDrugReq";
 import TransportAgencyViewDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencyViewDrugReq";
-import TransportAgencyViewSendDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencyViewSendDrugReq";
 import ManufacturerSendDrug from "../pages/UserDashboard/Manufacturer/ManufacturerSendDrug";
+import ManuDrugHandoverDetails from "../pages/UserDashboard/Manufacturer/ManuDrugHandoverDetails";
+import DistributorSendDrug from "../pages/UserDashboard/Distributor/DistributorSendDrug";
+import DistributorDrugHandoverReceive from "../pages/UserDashboard/Distributor/DistributorDrugHandoverReceive";
+import DistributorDrugHandoverSend from "../pages/UserDashboard/Distributor/DistributorDrugHandoverSend";
+import TransportAgencySendDrug from "../pages/UserDashboard/TransportAgency/TransportAgencySendDrug";
+import TransportAgencyDrugHandoverSend from "../pages/UserDashboard/TransportAgency/TransportAgencyDrugHandoverSend";
+import TransportAgencyDrugHandoverReceive from "../pages/UserDashboard/TransportAgency/TransportAgencyDrugHandoverReceive";
+import RetailerDrugHandoverReceive from "../pages/UserDashboard/Retailer/RetailerDrugHandoverReceive";
 
 export const router = createBrowserRouter([
   {
@@ -111,8 +117,26 @@ export const router = createBrowserRouter([
         element: <ManufacturerSendDrug></ManufacturerSendDrug>,
       },
       {
+        path: "/dashboard/ManuDrugHandover",
+        element: <ManuDrugHandoverDetails></ManuDrugHandoverDetails>,
+      },
+      {
         path: "/dashboard/manuViewDrugRequest",
         element: <ManuViewDrugRequest></ManuViewDrugRequest>,
+      },
+      {
+        path: "/dashboard/distributorSendDrug",
+        element: <DistributorSendDrug></DistributorSendDrug>,
+      },
+      {
+        path: "/dashboard/distributorSendHandover",
+        element: <DistributorDrugHandoverSend></DistributorDrugHandoverSend>,
+      },
+      {
+        path: "/dashboard/distributorReceiveHandover",
+        element: (
+          <DistributorDrugHandoverReceive></DistributorDrugHandoverReceive>
+        ),
       },
       {
         path: "/dashboard/distributorViewDrugRequest",
@@ -123,22 +147,32 @@ export const router = createBrowserRouter([
         element: <DistributorViewSendDrugReq></DistributorViewSendDrugReq>,
       },
       {
+        path: "/dashboard/retailerReceiveHandover",
+        element: <RetailerDrugHandoverReceive></RetailerDrugHandoverReceive>,
+      },
+      {
         path: "/dashboard/retailerViewDrugRequest",
         element: <RetailerViewDrugRequest></RetailerViewDrugRequest>,
       },
       {
-        path: "/dashboard/retailerViewSendDrugRequest",
-        element: <RetailerViewSendDrugReq></RetailerViewSendDrugReq>,
+        path: "/dashboard/transportAgencySendDrug",
+        element: <TransportAgencySendDrug></TransportAgencySendDrug>,
+      },
+      {
+        path: "/dashboard/transportAgencySendHandover",
+        element: (
+          <TransportAgencyDrugHandoverSend></TransportAgencyDrugHandoverSend>
+        ),
+      },
+      {
+        path: "/dashboard/transportAgencyReceiveHandover",
+        element: (
+          <TransportAgencyDrugHandoverReceive></TransportAgencyDrugHandoverReceive>
+        ),
       },
       {
         path: "/dashboard/transportAgencyViewDrugRequest",
         element: <TransportAgencyViewDrugReq></TransportAgencyViewDrugReq>,
-      },
-      {
-        path: "/dashboard/transportAgencyViewSendDrugRequest",
-        element: (
-          <TransportAgencyViewSendDrugReq></TransportAgencyViewSendDrugReq>
-        ),
       },
     ],
   },

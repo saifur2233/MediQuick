@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../context/UserContext";
 import { toast } from "react-hot-toast";
 
-const ManufacturerSendDrug = () => {
+const DistributorSendDrug = () => {
   const { user } = useContext(AuthContext);
   const senderName = user[0]?.name;
   const senderAddress = user[0]?.address;
@@ -24,7 +24,6 @@ const ManufacturerSendDrug = () => {
     event.preventDefault();
     const form = event.target;
     const drugId = form.drugId.value;
-
     fetch(`http://localhost:4000/api/v1/menufacturer/${drugId}`)
       .then((res) => res.json())
       .then((result) => {
@@ -84,6 +83,7 @@ const ManufacturerSendDrug = () => {
         form.reset();
       });
   };
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
@@ -319,4 +319,4 @@ const ManufacturerSendDrug = () => {
   );
 };
 
-export default ManufacturerSendDrug;
+export default DistributorSendDrug;

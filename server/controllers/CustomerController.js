@@ -1,6 +1,5 @@
 const { default: mongoose } = require("mongoose");
 const Drug = require("../models/Drug");
-const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 
 exports.searchDrugByDrugCode = catchAsync(async (req, res, next) => {

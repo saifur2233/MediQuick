@@ -51,7 +51,7 @@ const Header = () => {
       {user[0] ? (
         <>
           <li>
-            <Link className="font-bold text-primary" to="/dashboard/profile">
+            <Link className="font-bold text-primary" to="/dashboard">
               {user[0]?.name}
             </Link>
           </li>

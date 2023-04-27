@@ -75,6 +75,9 @@ const Dashboard = () => {
                   <Link to="/dashboard/ManuSendDrug">Send Drugs</Link>
                 </li>
                 <li>
+                  <Link to="/dashboard/ManuDrugHandover">Drug Handover</Link>
+                </li>
+                <li>
                   <Link to="/dashboard/manuViewDrugRequest">
                     View Drug Request
                   </Link>
@@ -84,13 +87,21 @@ const Dashboard = () => {
             {user[0]?.userType === "Distributor" && (
               <>
                 <li>
-                  <Link to="/dashboard/distributorViewDrugRequest">
-                    View Drug Request
+                  <Link to="/dashboard/distributorSendDrug">Send Drugs</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/distributorSendHandover">
+                    View Send Drug Handover
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/distributorViewSendDrugRequest">
-                    View Send Drug Request
+                  <Link to="/dashboard/distributorReceiveHandover">
+                    Receive Drug Handover
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/distributorViewDrugRequest">
+                    View Drug Request
                   </Link>
                 </li>
               </>
@@ -98,13 +109,13 @@ const Dashboard = () => {
             {user[0]?.userType === "Retailer" && (
               <>
                 <li>
-                  <Link to="/dashboard/retailerViewDrugRequest">
-                    View Drug Request
+                  <Link to="/dashboard/retailerReceiveHandover">
+                    Receive Drug Handover
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/retailerViewSendDrugRequest">
-                    View Send Drug Request
+                  <Link to="/dashboard/retailerViewDrugRequest">
+                    View Drug Request
                   </Link>
                 </li>
               </>
@@ -112,13 +123,23 @@ const Dashboard = () => {
             {user[0]?.userType === "TransportAgency" && (
               <>
                 <li>
-                  <Link to="/dashboard/transportAgencyViewDrugRequest">
-                    View Drug Request
+                  <Link to="/dashboard/transportAgencySendDrug">
+                    Send Drugs
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/transportAgencyViewSendDrugRequest">
-                    View Send Drug Request
+                  <Link to="/dashboard/transportAgencySendHandover">
+                    View Send Drug Handover
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/transportAgencyReceiveHandover">
+                    Receive Drug Handover
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/transportAgencyViewDrugRequest">
+                    View Drug Request
                   </Link>
                 </li>
               </>

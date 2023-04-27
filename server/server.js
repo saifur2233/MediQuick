@@ -7,6 +7,8 @@ const config = require("./dbconfig/dbConfig");
 const AuthRoute = require("./routes/AuthRoute");
 const AdminRoute = require("./routes/AdminRoute");
 const ManufacturerRoute = require("./routes/ManufacturerRoute");
+const CustomerRoute = require("./routes/CustomerRoute");
+const DrugHandoverRoute = require("./routes/DrugHandoverRoute");
 
 const app = express();
 
@@ -35,8 +37,12 @@ app.get("/", function (req, res) {
 app.use("/api/v1", AuthRoute);
 //admin route
 app.use("/api/v1", AdminRoute);
-//admin route
+//manufacturer route
 app.use("/api/v1", ManufacturerRoute);
+//customer route
+app.use("/api/v1", CustomerRoute);
+//Drug Handover route
+app.use("/api/v1", DrugHandoverRoute);
 
 // Error handling
 app.use("*", (req, res, next) => {

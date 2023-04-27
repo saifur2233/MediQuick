@@ -35,3 +35,11 @@ exports.getAllDrugs = catchAsync(async (req, res, next) => {
     .then((drugs) => res.status(200).json({ drugs }))
     .catch((error) => res.status(500).json({ error }));
 });
+
+exports.searchDrugByDrugCode = catchAsync(async (req, res, next) => {
+  const drugCode = req.params.drugId;
+
+  return Drug.find({ drugCode })
+    .then((drug) => res.status(200).json({ drug }))
+    .catch((error) => res.status(500).json({ error }));
+});
