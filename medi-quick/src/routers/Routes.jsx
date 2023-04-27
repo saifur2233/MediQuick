@@ -32,6 +32,7 @@ import TransportAgencySendDrug from "../pages/UserDashboard/TransportAgency/Tran
 import TransportAgencyDrugHandoverSend from "../pages/UserDashboard/TransportAgency/TransportAgencyDrugHandoverSend";
 import TransportAgencyDrugHandoverReceive from "../pages/UserDashboard/TransportAgency/TransportAgencyDrugHandoverReceive";
 import RetailerDrugHandoverReceive from "../pages/UserDashboard/Retailer/RetailerDrugHandoverReceive";
+import ViewHandoverDetails from "../pages/UserDashboard/ViewHandoverDetails";
 
 export const router = createBrowserRouter([
   {
@@ -173,6 +174,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/transportAgencyViewDrugRequest",
         element: <TransportAgencyViewDrugReq></TransportAgencyViewDrugReq>,
+      },
+      {
+        path: "/dashboard/viewHandoverDetail/:id",
+        element: <ViewHandoverDetails></ViewHandoverDetails>,
       },
     ],
   },

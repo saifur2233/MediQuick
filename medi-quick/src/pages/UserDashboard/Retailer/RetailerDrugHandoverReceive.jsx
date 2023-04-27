@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../context/UserContext";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../shared/Loading/Loading";
+import { useNavigate } from "react-router-dom";
 
 const RetailerDrugHandoverReceive = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const reciverAddress = user[0]?.address;
 
   const {
@@ -52,7 +54,12 @@ const RetailerDrugHandoverReceive = () => {
                     <td>{data?.senderName}</td>
                     <td>{data?.drugName}</td>
                     <td>
-                      <button className="btn btn-square btn-secondary btn-outline">
+                      <button
+                        onClick={() =>
+                          navigate(`/dashboard/viewHandoverDetail/${data?._id}`)
+                        }
+                        className="btn btn-square btn-secondary btn-outline"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

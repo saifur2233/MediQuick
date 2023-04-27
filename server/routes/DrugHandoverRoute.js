@@ -13,5 +13,6 @@ router.get(
   "/Handoverdata/receiver/:receiverAddress",
   DrugHandoverController.getAllReceiverDrugHandoverData
 );
+router.get("/Handoverdata/:id", DrugHandoverController.getDrugHandover);
 
 module.exports = router;

@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../context/UserContext";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ManufacturerSendDrug = () => {
   const { user } = useContext(AuthContext);
   const senderName = user[0]?.name;
   const senderAddress = user[0]?.address;
   const senderType = user[0]?.userType;
-
+  const navigate = useNavigate();
   const [drugDetials, setDrugDetials] = useState([]);
   const [currentTime, setCurrentTime] = useState("");
   const [senderSignature, setSenderSignature] = useState(null);
