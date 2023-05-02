@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose");
 const Drug = require("../models/Drug");
 const catchAsync = require("../utils/catchAsync");
+const PythonShell = require("python-shell").PythonShell;
 
 exports.searchDrugByDrugCode = catchAsync(async (req, res, next) => {
   const drugCode = req.params.drugCode;
@@ -9,3 +10,5 @@ exports.searchDrugByDrugCode = catchAsync(async (req, res, next) => {
     .then((drug) => res.status(200).json({ drug }))
     .catch((error) => res.status(500).json({ error }));
 });
+
+exports.testdata = catchAsync(async (req, res, next) => {});

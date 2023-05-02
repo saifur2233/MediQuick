@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../context/UserContext";
 import { toast } from "react-hot-toast";
+import Html5QrcodePlugin from "../../Customer/Html5QrcodePlugin";
 
 const TransportAgencySendDrug = () => {
   const { user } = useContext(AuthContext);
@@ -11,6 +12,14 @@ const TransportAgencySendDrug = () => {
   const [drugDetials, setDrugDetials] = useState([]);
   const [currentTime, setCurrentTime] = useState("");
   const [senderSignature, setSenderSignature] = useState(null);
+  const [decodedResults, setDecodedResults] = useState("");
+
+  const onNewScanResult = (decodedText, decodedResults) => {
+    console.log("Result: ", decodedResults);
+    setDecodedResults(decodedResults?.decodedText);
+  };
+
+  console.log(decodedResults);
 
   const getCurrentDate = () => {
     var today = new Date().toLocaleString();
@@ -89,13 +98,21 @@ const TransportAgencySendDrug = () => {
       <div className="hero-content text-center">
         <div className="max-w-lg">
           <h1 className="text-5xl font-bold py-6">Drugs Transaction</h1>
-          <div className="flex justify-center py-5">
+          <div className="flex justify-center gap-6 py-5">
+            <div>
+              <Html5QrcodePlugin
+                fps={10}
+                qrbox={250}
+                disableFlip={false}
+                qrCodeSuccessCallback={onNewScanResult}
+              ></Html5QrcodePlugin>
+            </div>
             <form onSubmit={handleSearchDeug}>
               <div className="form-control">
                 <input
                   type="text"
+                  value={decodedResults}
                   name="drugId"
-                  required
                   placeholder="Search with Drug Code"
                   className="input input-bordered"
                 />

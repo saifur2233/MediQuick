@@ -69,3 +69,14 @@ exports.getDrugHandover = catchAsync(async (req, res, next) => {
     .then((data) => res.status(200).send(data))
     .catch((error) => res.status(500).json({ error }));
 });
+
+exports.attachSignatureReceiver = catchAsync(async (req, res, next) => {
+  const { id, receiverSignature } = req.body;
+  const filter = { _id: id };
+  const update = { receiverSignature: receiverSignature };
+  return DrugHandover.findOneAndUpdate(filter, update, {
+    new: true,
+  })
+    .then((data) => res.status(200).json({ data }))
+    .catch((error) => res.status(500).json({ error }));
+});

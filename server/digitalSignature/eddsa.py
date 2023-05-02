@@ -152,27 +152,30 @@ def verify(public, msg, signature):
     hA = point_mul(h, A)
     return point_equal(sB, point_add(R, hA))
 
-print (f"Base point: {G[0]},{G[1]}")
+# print (f"Base point: {G[0]},{G[1]}")
 
 sk=os.urandom(32)
 pk=publickey(sk)
 
-print (f"\nPrivate key: {binascii.hexlify(sk).decode()}\nPublic key: {binascii.hexlify(pk).decode()}")
+# print (f"\nPrivate key: {binascii.hexlify(sk).decode()}\nPublic key: {binascii.hexlify(pk).decode()}")
 
 m = sys.argv[1]
 #m="Hello"
-print(f"\nMessage: {m}\n")
+# print(f"\nMessage: {m}\n")
 
 # if (len(sys.argv)>1):
 #   m=str(sys.argv[1])
 
 m=m.encode()
 
-print(f"\nMessage Encode: {m}\n")
+# print(f"\nMessage Encode: {m}\n")
 
 R,s=signature(sk,m)
-print (f"\nSignature\nR: {binascii.hexlify(R).decode()}\ns:{binascii.hexlify(s).decode()}")
+print (f"{binascii.hexlify(R).decode()}+{binascii.hexlify(s).decode()}")
 
-sig=R+s
-ver=verify(pk,m,sig)
-print ("\nVerified: ",ver)
+#sig=R+s
+
+# ver=verify(pk,m,sig)
+
+# print ("\nVerified: ",ver)
+

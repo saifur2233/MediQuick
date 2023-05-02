@@ -28,6 +28,8 @@ const ViewHandoverDetails = () => {
             <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Sender Name</th>
               <td className="border-2 border-primary">{data?.senderName}</td>
+            </tr>
+            <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Sender Type</th>
               <td className="border-2 border-primary">{data?.senderType}</td>
             </tr>
@@ -38,6 +40,8 @@ const ViewHandoverDetails = () => {
             <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Receiver Name</th>
               <td className="border-2 border-primary">{data?.receiverName}</td>
+            </tr>
+            <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Receiver Type</th>
               <td className="border-2 border-primary">{data?.receiverType}</td>
             </tr>
@@ -48,18 +52,24 @@ const ViewHandoverDetails = () => {
             <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Drug Name</th>
               <td className="border-2 border-primary">{data?.drugName}</td>
+            </tr>
+            <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Drug Code</th>
               <td className="border-2 border-primary">{data?.drugCode}</td>
             </tr>
             <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Drug Dosage</th>
               <td className="border-2 border-primary">{data?.drugDosage}</td>
+            </tr>
+            <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Drug Quantity</th>
               <td className="border-2 border-primary">{data?.drugQuantity}</td>
             </tr>
             <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Mfg. Date</th>
               <td className="border-2 border-primary">{data?.mfgDate}</td>
+            </tr>
+            <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Exp. Date</th>
               <td className="border-2 border-primary">{data?.expDate}</td>
             </tr>

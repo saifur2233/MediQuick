@@ -14,5 +14,9 @@ router.get(
   DrugHandoverController.getAllReceiverDrugHandoverData
 );
 router.get("/Handoverdata/:id", DrugHandoverController.getDrugHandover);
+router.post(
+  "/Handoverdata/receiver/attachSignature",
+  DrugHandoverController.attachSignatureReceiver
+);
 
 module.exports = router;

@@ -9,8 +9,27 @@ const AdminRoute = require("./routes/AdminRoute");
 const ManufacturerRoute = require("./routes/ManufacturerRoute");
 const CustomerRoute = require("./routes/CustomerRoute");
 const DrugHandoverRoute = require("./routes/DrugHandoverRoute");
+// let { PythonShell } = require("python-shell");
 
 const app = express();
+
+// let options = {
+//   pythonOptions: ["-u"],
+//   args: ["saif@gmail.com"],
+// };
+
+// PythonShell.run(
+//   "./digitalSignature/eddsa.py",
+//   options,
+//   function (err, results) {
+//     if (results) {
+//       dSignature = results.toString();
+//       console.log(results.toString());
+//     }
+//     if (err) throw err;
+//     console.log("finished");
+//   }
+// );
 
 // connect to mongodb
 mongoose.set("strictQuery", false);
