@@ -29,28 +29,46 @@ const UserRegistration = () => {
       userType,
       phone,
     };
-    console.log(userObj);
 
     if (password.length < 6) {
       setError(`Your Password must be 6 character`);
       return;
     } else {
       setError("");
-      // registration
-      fetch("http://localhost:4000/api/v1/usersignup", {
+      fetch("http://localhost:4000/api/v1/checkDuplicateUser", {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify(userObj),
       })
-        .then((result) => {
-          console.log(result);
-          form.reset();
-          toast.success("User created Successfully");
-        })
-        .catch((error) => {
-          setError("Registration Failed!Try Again..");
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.length === 1) {
+            setError("User Email and Address Already Exist!");
+            toast.error("User Email and Address Already Exist!");
+            return;
+          } else {
+            setError("");
+            //registration
+            fetch("http://localhost:4000/api/v1/usersignup", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(userObj),
+            })
+              .then((res) => res.json())
+              .then((result) => {
+                console.log(result);
+                //form.reset();
+                toast.success("User created Successfully");
+              })
+              .catch((error) => {
+                setError("Registration Failed!Try Again..");
+              });
+          }
         });
     }
   };
@@ -66,11 +84,12 @@ const UserRegistration = () => {
             />
           </figure>
         </div>
-        <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
           <form onSubmit={handleRegistration} className="card-body">
             <h1 className="text-5xl font-bold text-center text-primary">
               User Registration
             </h1>
+            <p className="text-error text-center">{error}</p>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">User Name</span>

@@ -8,4 +8,6 @@ router.get("/adminByEmail/:email", AuthController.adminSearchByEmail);
 router.post("/usersignup", AuthController.userSignup);
 router.post("/usersignin", AuthController.userSignin);
 router.post("/usersearch", AuthController.userSearch);
+router.post("/checkDuplicateUser", AuthController.userAlreadyExist);
+
 module.exports = router;

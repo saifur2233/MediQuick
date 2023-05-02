@@ -10,6 +10,8 @@ const UserModelSchema = new Schema({
   userType: String,
   phone: String,
   digitalSignature: String,
+  publicKey: Object,
+  privatekey: Object,
 });
 
 const UserModel = mongoose.model("User", UserModelSchema);

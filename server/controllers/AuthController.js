@@ -98,9 +98,11 @@ exports.userSignup = catchAsync(async (req, res, next) => {
   try {
     const { name, address, email, password, userType, phone } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const { privatekey, publicKey, signature } = generateSinature(email);
+    const { key, publicKey, signature } = generateSinature(email);
     const digitalSignature = signature;
     //console.log("digitalSignature: ", digitalSignature);
+    const privatekey = key.secret().toJSON();
+    //console.log("pri: ", privatekey.data);
     const user = new User({
       _id: new mongoose.Types.ObjectId(),
       name,
@@ -110,8 +112,10 @@ exports.userSignup = catchAsync(async (req, res, next) => {
       userType,
       phone,
       digitalSignature,
+      publicKey,
+      privatekey: privatekey.data,
     });
-    //await user.save();
+    await user.save();
     res.status(200).json({
       message: "Signup was successful!",
     });
@@ -184,16 +188,32 @@ exports.userSignin = catchAsync(async (req, res, next) => {
   }
 });
 
+exports.userAlreadyExist = catchAsync(async (req, res, next) => {
+  const userFindByEmail = await User.find({ email: req.body.email });
+  if (userFindByEmail) {
+    return res.status(200).send(userFindByEmail);
+  } else {
+    const userFindByAddress = await User.find({ address: req.body.address });
+    if (userFindByAddress) {
+      console.log(userFindByAddress);
+      return res.status(200).send(userFindByAddress);
+    } else {
+      return res.status(200).send();
+    }
+  }
+});
+
 function generateSinature(email) {
   // Generate a new key pair
   const key = ec.keyFromSecret(randomBytes(32));
   const publicKey = key.getPublic();
+
   // Sign a message
   const msg = email;
   const signature = key.sign(msg).toHex();
 
   const resultObj = {
-    privatekey: key,
+    key,
     publicKey: publicKey,
     signature: signature,
   };
