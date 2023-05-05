@@ -7,7 +7,7 @@ const About = () => {
         <div className="hero-content text-center">
           <div className="">
             <h1 className="text-5xl font-bold">MediQuick</h1>
-            <p className="py-6">
+            <p className="py-6 text-center font-bold italic">
               "Say no to fake drugs with MediQuick - Protecting your health is
               our top priority"
             </p>
@@ -15,9 +15,9 @@ const About = () => {
         </div>
       </div>
       <div className="hero bg-base-200">
-        <div className="hero-content flex-col lg:flex-row">
+        <div className="hero-content flex-col gap-8 lg:flex-row">
           <img
-            src="https://i.ibb.co/Zd90Tz7/menufacturer.jpg"
+            src="https://i.ibb.co/s6TbCv3/about-medi.jpg"
             className="max-w-lg rounded-lg shadow-2xl"
           />
           <div>
@@ -29,14 +29,14 @@ const About = () => {
               combination of advanced software, hardware, and analytical methods
               to verify the authenticity of medications.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <button className="btn btn-outline btn-primary">Read More</button>
           </div>
         </div>
       </div>
-      <div className="hero bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero bg-base-200 py-12 ">
+        <div className="hero-content flex-col gap-8 lg:flex-row-reverse">
           <img
-            src="https://i.ibb.co/mSVz0FV/pharmacy2.png"
+            src="https://i.ibb.co/P5gW4Nr/istockphoto-1209665570-612x612.jpg"
             className="max-w-lg rounded-lg shadow-2xl"
           />
           <div>
@@ -52,7 +52,27 @@ const About = () => {
               distribute counterfeit drugs. Another reason to choose MediQuick
               is its commitment to protecting public health.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <button className="btn btn-outline btn-primary">Read More</button>
+          </div>
+        </div>
+      </div>
+      <div className="hero bg-base-200 py-6">
+        <div className="hero-content flex-col gap-8 lg:flex-row">
+          <img
+            src="https://i.ibb.co/HDds6th/istockphoto-1370107014-612x612.jpg"
+            className="max-w-lg rounded-lg shadow-2xl"
+          />
+          <div>
+            <h1 className="text-5xl font-bold">
+              How does MediQuick detect counterfeit drugs?
+            </h1>
+            <p className="py-6">
+              MediQuick utilizes blockchain technology to track each transaction
+              in the drug supply chain and ensure that medications are genuine
+              and have not been tampered with or substituted with counterfeit
+              versions.
+            </p>
+            <button className="btn btn-outline btn-primary">Read More</button>
           </div>
         </div>
       </div>

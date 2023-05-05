@@ -116,7 +116,10 @@ const Profile = () => {
                       Wallet Address: {accountAddress.slice(0, 4)}...
                       {accountAddress.slice(38, 42)}
                     </p>
-                    <p>Wallet Balance: {accountBalance}</p>
+                    <p>
+                      Wallet Balance:
+                      {parseInt(accountBalance, 16)} "ETH"
+                    </p>
                     <div className="card-actions justify-end py-4">
                       <div className="flex justify-center gap-3">
                         <button
