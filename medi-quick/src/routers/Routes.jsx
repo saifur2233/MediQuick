@@ -21,7 +21,7 @@ import ManuViewDrugDetails from "../pages/UserDashboard/Manufacturer/ManuViewDru
 import ManuViewDrugRequest from "../pages/UserDashboard/Manufacturer/ManuViewDrugRequest";
 import DistributorViewDrugRequest from "../pages/UserDashboard/Distributor/DistributorViewDrugRequest";
 import DistributorViewSendDrugReq from "../pages/UserDashboard/Distributor/DistributorViewSendDrugReq";
-import RetailerViewDrugRequest from "../pages/UserDashboard/Retailer/RetailerViewDrugRequest";
+
 import TransportAgencyViewDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencyViewDrugReq";
 import ManufacturerSendDrug from "../pages/UserDashboard/Manufacturer/ManufacturerSendDrug";
 import ManuDrugHandoverDetails from "../pages/UserDashboard/Manufacturer/ManuDrugHandoverDetails";
@@ -33,6 +33,8 @@ import TransportAgencyDrugHandoverSend from "../pages/UserDashboard/TransportAge
 import TransportAgencyDrugHandoverReceive from "../pages/UserDashboard/TransportAgency/TransportAgencyDrugHandoverReceive";
 import RetailerDrugHandoverReceive from "../pages/UserDashboard/Retailer/RetailerDrugHandoverReceive";
 import ViewHandoverDetails from "../pages/UserDashboard/ViewHandoverDetails";
+import RetailerSendDrugReq from "../pages/UserDashboard/Retailer/RetailerSendDrugReq";
+import DistributorSendDrugReq from "../pages/UserDashboard/Distributor/DistributorSendDrugReq";
 
 export const router = createBrowserRouter([
   {
@@ -140,8 +142,8 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/distributorViewDrugRequest",
-        element: <DistributorViewDrugRequest></DistributorViewDrugRequest>,
+        path: "/dashboard/distributorSendDrugRequest",
+        element: <DistributorSendDrugReq></DistributorSendDrugReq>,
       },
       {
         path: "/dashboard/distributorViewSendDrugRequest",
@@ -152,8 +154,8 @@ export const router = createBrowserRouter([
         element: <RetailerDrugHandoverReceive></RetailerDrugHandoverReceive>,
       },
       {
-        path: "/dashboard/retailerViewDrugRequest",
-        element: <RetailerViewDrugRequest></RetailerViewDrugRequest>,
+        path: "/dashboard/retailerSendDrugRequest",
+        element: <RetailerSendDrugReq></RetailerSendDrugReq>,
       },
       {
         path: "/dashboard/transportAgencySendDrug",

@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import Html5QrcodePlugin from "./Html5QrcodePlugin";
 import ResultContainer from "./ResultContainer";
+import YouTube from "react-youtube";
 
 const DrugVerify = () => {
   const [decodedResults, setDecodedResults] = useState([]);
   const onNewScanResult = (decodedText, decodedResults) => {
     console.log("Result: ", decodedResults);
     setDecodedResults((prev) => [...prev, decodedResults]);
+  };
+
+  const opts = {
+    height: "390",
+    width: "640",
+    playerVars: {
+      autoplay: 1,
+    },
   };
   return (
     <div className="py-8">
@@ -41,15 +50,7 @@ const DrugVerify = () => {
               with us"
             </p>
             <div className="py-6">
-              <iframe
-                width="100%"
-                height="350"
-                src="https://www.youtube.com/embed/tXS4riUDn-o"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-              ></iframe>
+              <YouTube videoId="Ftl6LAG-yoM" opts={opts} />
             </div>
           </div>
         </div>

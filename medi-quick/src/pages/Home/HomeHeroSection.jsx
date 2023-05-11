@@ -2,14 +2,15 @@ import React from "react";
 
 const HomeHeroSection = () => {
   return (
-    <div className="hero min-h-screen ">
+    <div className="hero min-h-screen py-6">
       <div className="hero-content flex-col gap-8 lg:flex-row-reverse lg:px-16">
         <img
-          src="https://i.ibb.co/02DzhCg/7436652-3606172.jpg"
-          className="max-w-md rounded-lg"
+          src="https://i.ibb.co/603BTD2/istockphoto-1022854424-612x612.jpg"
+          className="max-w-lg rounded-lg"
         />
+
         <div>
-          <p className="font-bold text-primary">MediQuick</p>
+          <p className="font-bold text-primary">MEDIQUICK</p>
           <h1 className="text-5xl font-bold">
             MediQuick The Solution of Drug Supply Chain
           </h1>

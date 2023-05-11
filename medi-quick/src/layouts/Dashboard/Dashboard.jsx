@@ -100,8 +100,8 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/distributorViewDrugRequest">
-                    View Drug Request
+                  <Link to="/dashboard/distributorSendDrugRequest">
+                    Send Drug Request
                   </Link>
                 </li>
               </>
@@ -114,8 +114,8 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/retailerViewDrugRequest">
-                    View Drug Request
+                  <Link to="/dashboard/retailerSendDrugRequest">
+                    Send Drug Request
                   </Link>
                 </li>
               </>

@@ -9,6 +9,8 @@ const AdminRoute = require("./routes/AdminRoute");
 const ManufacturerRoute = require("./routes/ManufacturerRoute");
 const CustomerRoute = require("./routes/CustomerRoute");
 const DrugHandoverRoute = require("./routes/DrugHandoverRoute");
+const DrugRequestRoute = require("./routes/DrugRequestRoute");
+
 // let { PythonShell } = require("python-shell");
 
 const app = express();
@@ -62,6 +64,8 @@ app.use("/api/v1", ManufacturerRoute);
 app.use("/api/v1", CustomerRoute);
 //Drug Handover route
 app.use("/api/v1", DrugHandoverRoute);
+//Drug request route
+app.use("/api/v1", DrugRequestRoute);
 
 // Error handling
 app.use("*", (req, res, next) => {
