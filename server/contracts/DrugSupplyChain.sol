@@ -39,7 +39,11 @@ contract DrugSupplyChain {
         emit TransactionAdded(chainCount,drugName, drugCode, signature, msg.sender, recipient);
     }
 
-    function getTransaction(uint256 index)
+    function getTransaction() public view returns (Transaction[] memory) {
+        return chain;
+    }
+
+    function getTransactionByIndex(uint256 index)
         public
         view
         returns (

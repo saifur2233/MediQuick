@@ -1,0 +1,7 @@
+npm install -g truffle
+truffle --version
+truffle init
+truffle compile
+truffle migrate --reset
+truffle migrate --network goerli --reset
+truffle migrate --network sepolia --reset

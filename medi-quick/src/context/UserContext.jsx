@@ -36,17 +36,17 @@ const UserContext = ({ children }) => {
 
   const fetchData = () => {
     const token = localStorage.getItem("access_token");
-    console.log("Token: ", token);
+    //console.log("Token: ", token);
     if (token) {
       const myDecodedToken = decodeToken(token);
-      console.log("myDecodedToken: ", myDecodedToken?.email);
+      //console.log("myDecodedToken: ", myDecodedToken?.email);
       const isMyTokenExpired = isExpired(token);
       fetch(
         `http://localhost:4000/api/v1/adminByEmail/${myDecodedToken?.email}`
       )
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
+          //console.log(result);
           setUser(result.user);
         })
         .catch((err) => {
