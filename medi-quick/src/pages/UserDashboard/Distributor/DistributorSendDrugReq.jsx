@@ -20,6 +20,7 @@ const DistributorSendDrugReq = () => {
     const form = event.target;
     const receiverName = form.receiverName.value;
     const receiverType = form.receiverType.value;
+    const receiverEmail = form.receiverEmail.value;
     const drugName = form.drugName.value;
     const drugDosage = form.drugDosage.value;
     const drugQuantity = form.drugQuantity.value;
@@ -29,6 +30,7 @@ const DistributorSendDrugReq = () => {
       senderEmail,
       receiverName,
       receiverType,
+      receiverEmail,
       drugName,
       drugDosage,
       drugQuantity,
@@ -46,7 +48,7 @@ const DistributorSendDrugReq = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        //console.log(data);
+        console.log(data);
         toast.success("Drug request send successfully.");
         form.reset();
       });
@@ -87,7 +89,7 @@ const DistributorSendDrugReq = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Sender Address</span>
+                  <span className="label-text">Sender Email</span>
                 </label>
                 <input
                   type="text"
@@ -125,7 +127,18 @@ const DistributorSendDrugReq = () => {
                   </select>
                 </div>
               </div>
-
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Receiver Email</span>
+                </label>
+                <input
+                  type="text"
+                  name="receiverEmail"
+                  placeholder="Sender Address"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Drug Name</span>

@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="py-20">
+    <div className="pt-20">
       <div className="hero bg-base-200">
         <div className="hero-content text-center">
           <div className="">

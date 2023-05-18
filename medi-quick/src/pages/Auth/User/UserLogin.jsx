@@ -48,14 +48,18 @@ const UserLogin = () => {
     <div className="hero min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold text-primary">User Login Panel!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
+          <div className="flex justify-center">
+            <img
+              src="https://i.ibb.co/qCBxKzm/11683784-4794658.jpg"
+              alt="11906379-484111"
+              width="70%"
+            />
+          </div>
         </div>
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
+          <h1 className="text-5xl font-bold text-center text-primary py-3">
+            User Login Panel!
+          </h1>
           <form onSubmit={handleUserLogin} className="card-body">
             <p className="text-center text-red-600">{error}</p>
             <div className="form-control">
@@ -77,7 +81,7 @@ const UserLogin = () => {
               <select
                 name="role"
                 defaultValue="Menufacturer"
-                className="select required select-bordered w-full max-w-xs"
+                className="select required select-bordered w-full"
               >
                 <option disabled>Select Your Role</option>
                 <option value="Menufacturer">Menufacturer</option>

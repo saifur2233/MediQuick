@@ -14,11 +14,11 @@ const DrugVerify = () => {
     height: "390",
     width: "640",
     playerVars: {
-      autoplay: 1,
+      autoplay: 0,
     },
   };
   return (
-    <div className="py-8">
+    <div className="pt-8">
       <div className="hero py-6">
         <div className="hero-content text-center">
           <div className="">

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../context/UserContext";
 import { toast } from "react-hot-toast";
 
-const RetailerSendDrugReq = () => {
+const TransportAgencySendDrugReq = () => {
   const { user } = useContext(AuthContext);
   const senderName = user[0]?.name;
   const senderType = user[0]?.userType;
@@ -209,4 +209,4 @@ const RetailerSendDrugReq = () => {
   );
 };
 
-export default RetailerSendDrugReq;
+export default TransportAgencySendDrugReq;

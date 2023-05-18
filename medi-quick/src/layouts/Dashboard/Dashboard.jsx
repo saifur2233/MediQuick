@@ -104,6 +104,16 @@ const Dashboard = () => {
                     Send Drug Request
                   </Link>
                 </li>
+                <li>
+                  <Link to="/dashboard/distributorViewSendDrugRequest">
+                    View Send Drug Request
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/distributorViewDrugRequest">
+                    View Drug Request
+                  </Link>
+                </li>
               </>
             )}
             {user[0]?.userType === "Retailer" && (
@@ -116,6 +126,16 @@ const Dashboard = () => {
                 <li>
                   <Link to="/dashboard/retailerSendDrugRequest">
                     Send Drug Request
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/retailerViewSendDrugRequest">
+                    View Send Drug Request
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/retailerViewDrugRequest">
+                    View Drug Request
                   </Link>
                 </li>
               </>
@@ -138,12 +158,25 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/dashboard/transportAgencySendDrugReq">
+                    Send Drug Request
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/transportAgencyViewSendDrugReq">
+                    View Send Drug Request
+                  </Link>
+                </li>
+                <li>
                   <Link to="/dashboard/transportAgencyViewDrugRequest">
                     View Drug Request
                   </Link>
                 </li>
               </>
             )}
+            <li>
+              <Link to="/dashboard/viewAllUserInfo">All User Info</Link>
+            </li>
             <li>
               <Link onClick={handleLogout}>Logout</Link>
             </li>

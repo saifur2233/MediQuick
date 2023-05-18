@@ -8,6 +8,7 @@ const DrugRequestModelSchema = new Schema({
   senderEmail: String,
   receiverName: String,
   receiverType: String,
+  receiverEmail: String,
   drugName: String,
   drugDosage: String,
   drugQuantity: String,

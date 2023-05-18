@@ -220,6 +220,12 @@ function generateSinature(email) {
   return resultObj;
 }
 
+exports.verifyUserDigitalSignature = catchAsync(async (req, res, next) => {
+  const { msg, signature, publicKey } = req.body;
+  const isValid = ec.verify(msg, signature, publicKey);
+  return res.status(200).send(isValid);
+});
+
 function verifySignature(msg, signature, publicKey) {
   // Verify a signature
 
@@ -228,8 +234,30 @@ function verifySignature(msg, signature, publicKey) {
 }
 // const signature =
 //   "594702A037C9AC98D0211E35D565D5BEC542A44DDCF557FB5579CA5713F02103C7E3C6C40732A67C3C61C0A1FA8E7E0A3168E7DAF47F84A722595316ABD88302";
-// const publicKey = [
-//   31, 161, 255, 10, 161, 65, 47, 19, 18, 67, 35, 50, 156, 96, 163, 16, 8, 253,
-//   213, 217, 143, 79, 8, 134, 190, 62, 8, 0, 244, 57, 8, 67,
-// ];
+const publicKey = [
+  31, 161, 255, 10, 161, 65, 47, 19, 18, 67, 35, 50, 156, 96, 163, 16, 8, 253,
+  213, 217, 143, 79, 8, 134, 190, 62, 8, 0, 244, 57, 8, 67,
+];
 // verifySignature("saif11@gmail.com", signature, publicKey);
+// 237,36,215,57,32,3,184,197,59,111,88,139,14,220,219,81,93,34,216,18,90,
+// 212, 156, 183, 10, 21, 101, 28, 213, 71, 127, 140
+console.log(typeof publicKey);
+exports.getAllUserInfo = catchAsync(async (req, res, next) => {
+  return User.find({
+    userType: {
+      $in: ["Manufacturer", "Distributor", "Retailer", "TransportAgency"],
+    },
+  })
+    .select("-password")
+    .then((user) => res.status(200).send(user))
+    .catch((error) => res.status(500).json({ error }));
+});
+
+exports.getUserByEmail = catchAsync(async (req, res, next) => {
+  return User.find({
+    email: req.params.email,
+  })
+    .select("-password")
+    .then((user) => res.status(200).send(user))
+    .catch((error) => res.status(500).json({ error }));
+});

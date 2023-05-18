@@ -24,40 +24,43 @@ const CheckAuthenticity = () => {
 
   return (
     <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
+      <div className="hero-content text-center">
+        <div className="">
           <h1 className="text-5xl font-bold">Drug Authenticity Check</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+          <p className="py-6 font-bold italic">
+            "Don't take chances with your health - Choose MediQuick for reliable
+            counterfeit drug detection"
           </p>
-        </div>
-        <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100 border-1 border-y-4 rounded-b-lg border-primary hover:border-4">
-          <div className="card-body">
-            {drug.length === 0 ? (
-              <>
-                <h2 className="card-title">Drug Not Found In The System...</h2>
-                <p className="text-red-500 bg-neutral">
-                  Please, Check the drug carefully!!!{" "}
-                </p>
-              </>
-            ) : (
-              <>
-                <h2 className="card-title text-2xl">
-                  Drug Name: {drug[0]?.drugName}
-                </h2>
-                <p className="text-green-500 font-bold bg-neutral py-2">
-                  Status: Authentic
-                </p>
-                <p>Drug Code: {drug[0]?.drugCode}</p>
-                <p>Dosage: {drug[0]?.drugDosage}</p>
-                <div className="card-actions justify-end">
-                  <p>Mfg Date: {drug[0]?.mfgDate}</p>
-                  <p>Exp Date: {drug[0]?.expDate}</p>
-                </div>
-              </>
-            )}
+          <div className="flex justify-center">
+            <div className="card w-full max-w-lg shadow-2xl bg-base-100 border-1 border-y-4 rounded-b-lg border-primary hover:border-4">
+              <div className="card-body">
+                {drug.length === 0 ? (
+                  <>
+                    <h2 className="card-title">
+                      Drug Not Found In The System...
+                    </h2>
+                    <p className="text-red-500 bg-neutral">
+                      Please, Check the drug carefully!!!{" "}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="card-title text-2xl text-center">
+                      Drug Name: {drug[0]?.drugName}
+                    </h2>
+                    <p className="text-green-500 font-bold bg-neutral py-2">
+                      Status: Authentic
+                    </p>
+                    <p>Drug Code: {drug[0]?.drugCode}</p>
+                    <p>Dosage: {drug[0]?.drugDosage}</p>
+                    <div className="card-actions justify-end">
+                      <p>Mfg Date: {drug[0]?.mfgDate}</p>
+                      <p>Exp Date: {drug[0]?.expDate}</p>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>

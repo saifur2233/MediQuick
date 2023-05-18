@@ -35,6 +35,11 @@ import RetailerDrugHandoverReceive from "../pages/UserDashboard/Retailer/Retaile
 import ViewHandoverDetails from "../pages/UserDashboard/ViewHandoverDetails";
 import RetailerSendDrugReq from "../pages/UserDashboard/Retailer/RetailerSendDrugReq";
 import DistributorSendDrugReq from "../pages/UserDashboard/Distributor/DistributorSendDrugReq";
+import RetailerViewSendDrugReq from "../pages/UserDashboard/Retailer/RetailerViewSendDrugReq";
+import RetailerViewDrugRequest from "../pages/UserDashboard/Retailer/RetailerViewDrugRequest";
+import TransportAgencySendDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencySendDrugReq";
+import TransportAgencyViewSendDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencyViewSendDrugReq";
+import AllUserInfo from "../pages/UserDashboard/AllUserInfo";
 
 export const router = createBrowserRouter([
   {
@@ -150,12 +155,24 @@ export const router = createBrowserRouter([
         element: <DistributorViewSendDrugReq></DistributorViewSendDrugReq>,
       },
       {
+        path: "/dashboard/distributorViewDrugRequest",
+        element: <DistributorViewDrugRequest></DistributorViewDrugRequest>,
+      },
+      {
         path: "/dashboard/retailerReceiveHandover",
         element: <RetailerDrugHandoverReceive></RetailerDrugHandoverReceive>,
       },
       {
         path: "/dashboard/retailerSendDrugRequest",
         element: <RetailerSendDrugReq></RetailerSendDrugReq>,
+      },
+      {
+        path: "/dashboard/retailerViewSendDrugRequest",
+        element: <RetailerViewSendDrugReq></RetailerViewSendDrugReq>,
+      },
+      {
+        path: "/dashboard/retailerViewDrugRequest",
+        element: <RetailerViewDrugRequest></RetailerViewDrugRequest>,
       },
       {
         path: "/dashboard/transportAgencySendDrug",
@@ -174,12 +191,26 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/transportAgencySendDrugReq",
+        element: <TransportAgencySendDrugReq></TransportAgencySendDrugReq>,
+      },
+      {
+        path: "/dashboard/transportAgencyViewSendDrugReq",
+        element: (
+          <TransportAgencyViewSendDrugReq></TransportAgencyViewSendDrugReq>
+        ),
+      },
+      {
         path: "/dashboard/transportAgencyViewDrugRequest",
         element: <TransportAgencyViewDrugReq></TransportAgencyViewDrugReq>,
       },
       {
         path: "/dashboard/viewHandoverDetail/:id",
         element: <ViewHandoverDetails></ViewHandoverDetails>,
+      },
+      {
+        path: "/dashboard/viewAllUserInfo",
+        element: <AllUserInfo></AllUserInfo>,
       },
     ],
   },

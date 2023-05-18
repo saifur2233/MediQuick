@@ -3,9 +3,9 @@ import Loading from "../../../shared/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../context/UserContext";
 
-const DistributorViewDrugRequest = () => {
+const TransportAgencyViewSendDrugReq = () => {
   const { user } = useContext(AuthContext);
-  const receiverEmail = user[0]?.email;
+  const senderEmail = user[0]?.email;
 
   const {
     data: allDrugReq = [],
@@ -15,7 +15,7 @@ const DistributorViewDrugRequest = () => {
     queryKey: ["allDrugReq"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:4000/api/v1/drugrequest/receiver/${receiverEmail}`
+        `http://localhost:4000/api/v1/drugrequest/sender/${senderEmail}`
       );
       const data = await res.json();
       return data.data;
@@ -35,9 +35,9 @@ const DistributorViewDrugRequest = () => {
               <thead>
                 <tr>
                   <th>Index</th>
-                  <th>Sender Name</th>
-                  <th>Sender Email</th>
-                  <th>Sender Type</th>
+                  <th>Receiver Name</th>
+                  <th>Receiver Email</th>
+                  <th>Receiver Type</th>
                   <th>Drug Name</th>
                   <th>Drug Dosage</th>
                   <th>Quantity</th>
@@ -48,9 +48,9 @@ const DistributorViewDrugRequest = () => {
                 {allDrugReq.map((req, i) => (
                   <tr key={req._id}>
                     <th>{i + 1}</th>
-                    <td>{req?.senderName}</td>
-                    <td>{req?.senderEmail}</td>
-                    <td>{req?.senderType}</td>
+                    <td>{req?.receiverName}</td>
+                    <td>{req?.receiverEmail}</td>
+                    <td>{req?.receiverType}</td>
                     <td>{req?.drugName}</td>
                     <td>{req?.drugDosage}</td>
                     <td>{req?.drugQuantity}</td>
@@ -83,4 +83,4 @@ const DistributorViewDrugRequest = () => {
   );
 };
 
-export default DistributorViewDrugRequest;
+export default TransportAgencyViewSendDrugReq;

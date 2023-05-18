@@ -3,7 +3,7 @@ import Loading from "../../../shared/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../context/UserContext";
 
-const DistributorViewDrugRequest = () => {
+const RetailerViewDrugRequest = () => {
   const { user } = useContext(AuthContext);
   const receiverEmail = user[0]?.email;
 
@@ -83,4 +83,4 @@ const DistributorViewDrugRequest = () => {
   );
 };
 
-export default DistributorViewDrugRequest;
+export default RetailerViewDrugRequest;

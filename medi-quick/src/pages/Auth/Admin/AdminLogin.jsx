@@ -51,12 +51,12 @@ const AdminLogin = () => {
           <div className="flex justify-center">
             <img
               src="https://i.ibb.co/VgmQTLN/signup3.jpg"
-              width="50%"
+              width="70%"
               alt="AdminLoginPage"
             />
           </div>
         </div>
-        <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
           <h1 className="text-5xl font-bold text-primary text-center pt-4">
             Admin Login Panel!
           </h1>

@@ -9,5 +9,7 @@ router.post("/usersignup", AuthController.userSignup);
 router.post("/usersignin", AuthController.userSignin);
 router.post("/usersearch", AuthController.userSearch);
 router.post("/checkDuplicateUser", AuthController.userAlreadyExist);
+router.get("/allusers-info", AuthController.getAllUserInfo);
+router.get("/user-search/:email", AuthController.getUserByEmail);
 
 module.exports = router;

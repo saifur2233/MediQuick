@@ -7,7 +7,10 @@ import { useNavigate } from "react-router-dom";
 const TransportAgencyDrugHandoverReceive = () => {
   const { user } = useContext(AuthContext);
   const reciverAddress = user[0]?.address;
+  const receiverSignature = user[0]?.digitalSignature;
+
   const navigate = useNavigate();
+
   const {
     data: allHandoverData = [],
     isLoading,
@@ -27,6 +30,29 @@ const TransportAgencyDrugHandoverReceive = () => {
     return <Loading></Loading>;
   }
 
+  const handleReceiverAttachSignature = (id) => {
+    const reciverSignatureObj = { id, receiverSignature };
+
+    fetch(
+      `http://localhost:4000/api/v1/Handoverdata/receiver/attachSignature`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(reciverSignatureObj),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Signature Attach successfully.");
+      })
+      .catch((error) => {
+        toast.error("Signature didn't Attach.");
+      });
+  };
+
   return (
     <div>
       <div>
@@ -42,6 +68,7 @@ const TransportAgencyDrugHandoverReceive = () => {
                   <th>Date</th>
                   <th>Sender Name</th>
                   <th>Drug Name</th>
+                  <th>Signature</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -52,6 +79,18 @@ const TransportAgencyDrugHandoverReceive = () => {
                     <td>{data?.currentTime}</td>
                     <td>{data?.senderName}</td>
                     <td>{data?.drugName}</td>
+                    <td>
+                      {data?.receiverSignature === "" && (
+                        <button
+                          onClick={() =>
+                            handleReceiverAttachSignature(data._id)
+                          }
+                          className="btn btn-outline btn-primary"
+                        >
+                          Attach
+                        </button>
+                      )}
+                    </td>
                     <td>
                       <button
                         onClick={() =>
