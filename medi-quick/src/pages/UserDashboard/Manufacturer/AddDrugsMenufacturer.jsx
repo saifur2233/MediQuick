@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import QRCode from "react-qr-code";
+import { AuthContext } from "../../../context/UserContext";
 
 const AddDrugsMenufacturer = () => {
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const userName = user[0]?.name;
+  const userAddress = user[0]?.address;
+  const userType = user[0]?.userType;
+  const userEmail = user[0]?.email;
+
   const [drugCode, setDrugCode] = useState("");
 
   const generateDrugCode = () => {
@@ -35,7 +42,6 @@ const AddDrugsMenufacturer = () => {
   const handleAddDrug = (event) => {
     event.preventDefault();
     const form = event.target;
-    const menufacturerName = form.menufacturerName.value;
     const drugName = form.drugName.value;
     const drugDosage = form.drugDosage.value;
     const drugQuantity = form.drugQuantity.value;
@@ -43,7 +49,10 @@ const AddDrugsMenufacturer = () => {
     const expDate = form.expDate.value;
 
     const drug = {
-      menufacturerName,
+      userName,
+      userType,
+      userEmail,
+      userAddress,
       drugName,
       drugCode,
       drugDosage,
@@ -54,7 +63,7 @@ const AddDrugsMenufacturer = () => {
 
     //console.log(drug);
 
-    fetch("http://localhost:4000/api/v1/menufacturer/addDrug", {
+    fetch("http://localhost:4000/api/v1/drug-basket/addDrug", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -88,9 +97,9 @@ const AddDrugsMenufacturer = () => {
                 <input
                   type="text"
                   name="menufacturerName"
-                  placeholder="Menufacturer Name"
+                  value={userName}
+                  readOnly
                   className="input input-bordered"
-                  required
                 />
               </div>
               <div className="form-control">
@@ -105,7 +114,7 @@ const AddDrugsMenufacturer = () => {
                   required
                 />
               </div>
-              <div className="form-control">
+              <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text">Drug Code</span>
                 </label>
@@ -119,7 +128,7 @@ const AddDrugsMenufacturer = () => {
                   />
                   <span
                     onClick={generateDrugCode}
-                    className="btn btn-accent text-white"
+                    className="btn btn-info text-white"
                   >
                     GENERATE
                   </span>

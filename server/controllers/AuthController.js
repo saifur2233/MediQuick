@@ -98,7 +98,7 @@ exports.userSignup = catchAsync(async (req, res, next) => {
   try {
     const { name, address, email, password, userType, phone } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const { key, publicKey, signature } = generateSinature(email);
+    const { key, publicKey, signature } = generateSinature(address);
     const digitalSignature = signature;
     //console.log("digitalSignature: ", digitalSignature);
     const privatekey = key.secret().toJSON();
@@ -203,13 +203,13 @@ exports.userAlreadyExist = catchAsync(async (req, res, next) => {
   }
 });
 
-function generateSinature(email) {
+function generateSinature(address) {
   // Generate a new key pair
   const key = ec.keyFromSecret(randomBytes(32));
   const publicKey = key.getPublic();
 
   // Sign a message
-  const msg = email;
+  const msg = address;
   const signature = key.sign(msg).toHex();
 
   const resultObj = {
@@ -220,6 +220,7 @@ function generateSinature(email) {
   return resultObj;
 }
 
+// Verify a signature
 exports.verifyUserDigitalSignature = catchAsync(async (req, res, next) => {
   const { msg, signature, publicKey } = req.body;
   const isValid = ec.verify(msg, signature, publicKey);
@@ -227,21 +228,17 @@ exports.verifyUserDigitalSignature = catchAsync(async (req, res, next) => {
 });
 
 function verifySignature(msg, signature, publicKey) {
-  // Verify a signature
-
   const isValid = ec.verify(msg, signature, publicKey);
   console.log(`Is valid? ${isValid}`);
 }
 // const signature =
 //   "594702A037C9AC98D0211E35D565D5BEC542A44DDCF557FB5579CA5713F02103C7E3C6C40732A67C3C61C0A1FA8E7E0A3168E7DAF47F84A722595316ABD88302";
-const publicKey = [
-  31, 161, 255, 10, 161, 65, 47, 19, 18, 67, 35, 50, 156, 96, 163, 16, 8, 253,
-  213, 217, 143, 79, 8, 134, 190, 62, 8, 0, 244, 57, 8, 67,
-];
+// const publicKey = [
+//   31, 161, 255, 10, 161, 65, 47, 19, 18, 67, 35, 50, 156, 96, 163, 16, 8, 253,
+//   213, 217, 143, 79, 8, 134, 190, 62, 8, 0, 244, 57, 8, 67,
+// ];
 // verifySignature("saif11@gmail.com", signature, publicKey);
-// 237,36,215,57,32,3,184,197,59,111,88,139,14,220,219,81,93,34,216,18,90,
-// 212, 156, 183, 10, 21, 101, 28, 213, 71, 127, 140
-console.log(typeof publicKey);
+// console.log(typeof publicKey);
 exports.getAllUserInfo = catchAsync(async (req, res, next) => {
   return User.find({
     userType: {

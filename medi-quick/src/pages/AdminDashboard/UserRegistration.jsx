@@ -62,7 +62,7 @@ const UserRegistration = () => {
               .then((res) => res.json())
               .then((result) => {
                 console.log(result);
-                //form.reset();
+                form.reset();
                 toast.success("User created Successfully");
               })
               .catch((error) => {

@@ -33,7 +33,7 @@ const TransportAgencySendDrug = () => {
     event.preventDefault();
     const form = event.target;
     const drugId = form.drugId.value;
-    fetch(`http://localhost:4000/api/v1/menufacturer/${drugId}`)
+    fetch(`http://localhost:4000/api/v1/drug-basket/${drugId}`)
       .then((res) => res.json())
       .then((result) => {
         const data = result.drug;

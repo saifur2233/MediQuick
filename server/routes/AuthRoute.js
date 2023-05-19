@@ -11,5 +11,8 @@ router.post("/usersearch", AuthController.userSearch);
 router.post("/checkDuplicateUser", AuthController.userAlreadyExist);
 router.get("/allusers-info", AuthController.getAllUserInfo);
 router.get("/user-search/:email", AuthController.getUserByEmail);
-
+router.post(
+  "/user/verify-signature",
+  AuthController.verifyUserDigitalSignature
+);
 module.exports = router;

@@ -17,11 +17,10 @@ import AllDistributor from "../pages/AdminDashboard/AllDistributor";
 import AllTransportAgency from "../pages/AdminDashboard/AllTransportAgency";
 import AllRetailer from "../pages/AdminDashboard/AllRetailer";
 import AddDrugsMenufacturer from "../pages/UserDashboard/Manufacturer/AddDrugsMenufacturer";
-import ManuViewDrugDetails from "../pages/UserDashboard/Manufacturer/ManuViewDrugDetails";
+import ManuViewDrug from "../pages/UserDashboard/Manufacturer/ManuViewDrug";
 import ManuViewDrugRequest from "../pages/UserDashboard/Manufacturer/ManuViewDrugRequest";
 import DistributorViewDrugRequest from "../pages/UserDashboard/Distributor/DistributorViewDrugRequest";
 import DistributorViewSendDrugReq from "../pages/UserDashboard/Distributor/DistributorViewSendDrugReq";
-
 import TransportAgencyViewDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencyViewDrugReq";
 import ManufacturerSendDrug from "../pages/UserDashboard/Manufacturer/ManufacturerSendDrug";
 import ManuDrugHandoverDetails from "../pages/UserDashboard/Manufacturer/ManuDrugHandoverDetails";
@@ -40,6 +39,7 @@ import RetailerViewDrugRequest from "../pages/UserDashboard/Retailer/RetailerVie
 import TransportAgencySendDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencySendDrugReq";
 import TransportAgencyViewSendDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencyViewSendDrugReq";
 import AllUserInfo from "../pages/UserDashboard/AllUserInfo";
+import ViewDrugDetails from "../pages/UserDashboard/ViewDrugDetails";
 
 export const router = createBrowserRouter([
   {
@@ -118,7 +118,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/manuViewDrugDetails",
-        element: <ManuViewDrugDetails></ManuViewDrugDetails>,
+        element: <ManuViewDrug></ManuViewDrug>,
       },
       {
         path: "/dashboard/ManuSendDrug",
@@ -211,6 +211,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/viewAllUserInfo",
         element: <AllUserInfo></AllUserInfo>,
+      },
+      {
+        path: "/dashboard/viewDrugDetails/:id",
+        element: <ViewDrugDetails></ViewDrugDetails>,
       },
     ],
   },

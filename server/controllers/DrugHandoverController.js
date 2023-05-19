@@ -7,6 +7,7 @@ exports.addDrugHandoverData = catchAsync(async (req, res, next) => {
     senderName,
     senderType,
     senderAddress,
+    senderPublicKey,
     receiverName,
     receiverType,
     receiverAddress,
@@ -21,15 +22,17 @@ exports.addDrugHandoverData = catchAsync(async (req, res, next) => {
   } = req.body;
 
   const receiverSignature = "";
-
+  const receiverPublicKey = "";
   const drugHandover = new DrugHandover({
     _id: new mongoose.Types.ObjectId(),
     senderName,
     senderType,
     senderAddress,
+    senderPublicKey,
     receiverName,
     receiverType,
     receiverAddress,
+    receiverPublicKey,
     drugName,
     drugCode,
     drugDosage,

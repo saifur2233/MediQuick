@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
-const Drug = require("../models/Drug");
+const Drug = require("../models/DrugBasket");
 const catchAsync = require("../utils/catchAsync");
 
 exports.addDrug = catchAsync(async (req, res, next) => {
