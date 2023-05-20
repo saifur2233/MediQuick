@@ -8,6 +8,7 @@ const TransportAgencyDrugHandoverReceive = () => {
   const { user } = useContext(AuthContext);
   const reciverAddress = user[0]?.address;
   const receiverSignature = user[0]?.digitalSignature;
+  const receiverPublicKey = user[0]?.publicKey;
 
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const TransportAgencyDrugHandoverReceive = () => {
   }
 
   const handleReceiverAttachSignature = (id) => {
-    const reciverSignatureObj = { id, receiverSignature };
+    const reciverSignatureObj = { id, receiverSignature, receiverPublicKey };
 
     fetch(
       `http://localhost:4000/api/v1/Handoverdata/receiver/attachSignature`,

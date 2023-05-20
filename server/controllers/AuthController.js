@@ -222,8 +222,9 @@ function generateSinature(address) {
 
 // Verify a signature
 exports.verifyUserDigitalSignature = catchAsync(async (req, res, next) => {
-  const { msg, signature, publicKey } = req.body;
-  const isValid = ec.verify(msg, signature, publicKey);
+  const { userAddress, userSignature, userPublicKey } = req.body;
+  console.log(typeof userPublicKey);
+  const isValid = ec.verify(userAddress, userSignature, userPublicKey);
   return res.status(200).send(isValid);
 });
 

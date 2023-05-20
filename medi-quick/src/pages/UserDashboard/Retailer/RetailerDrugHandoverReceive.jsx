@@ -3,12 +3,14 @@ import { AuthContext } from "../../../context/UserContext";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../shared/Loading/Loading";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const RetailerDrugHandoverReceive = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const reciverAddress = user[0]?.address;
   const receiverSignature = user[0]?.digitalSignature;
+  const receiverPublicKey = user[0]?.publicKey;
 
   const {
     data: allHandoverData = [],
@@ -30,7 +32,7 @@ const RetailerDrugHandoverReceive = () => {
   }
 
   const handleReceiverAttachSignature = (id) => {
-    const reciverSignatureObj = { id, receiverSignature };
+    const reciverSignatureObj = { id, receiverSignature, receiverPublicKey };
 
     fetch(
       `http://localhost:4000/api/v1/Handoverdata/receiver/attachSignature`,

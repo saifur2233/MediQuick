@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../shared/Loading/Loading";
+import { toast } from "react-hot-toast";
 
 const ViewHandoverDetails = () => {
   const [data, setData] = useState({});
@@ -19,11 +20,63 @@ const ViewHandoverDetails = () => {
     return <Loading></Loading>;
   }
   console.log(data);
+
+  const handleSenderSignatureCopy = () => {
+    navigator.clipboard.writeText(data?.senderSignature);
+    toast.success("Copy to clipboard");
+  };
+
+  const handleReceiverSignatureCopy = () => {
+    navigator.clipboard.writeText(data?.receiverSignature);
+    toast.success("Copy to clipboard");
+  };
+
+  const handleSignatureVerify = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const userAddress = form.userAddress.value;
+    const userSignature = form.userSignature.value;
+    const Key = form.userPublicKey.value;
+    let userPublicKey = {};
+    if (Key === "sender") {
+      userPublicKey = data?.senderPublicKey;
+    } else if (Key === "receiver") {
+      userPublicKey = data?.senderPublicKey;
+    } else {
+      userPublicKey = {};
+    }
+
+    console.log(typeof userPublicKey);
+    const verifyObj = {
+      userAddress,
+      userSignature,
+      userPublicKey,
+    };
+    console.log(verifyObj);
+
+    fetch("http://localhost:4000/api/v1/user/verify-signature", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(verifyObj),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data === true) {
+          toast.success("This Signature is Verified.");
+          form.reset();
+        } else {
+          toast.error("Sorry, This Signature is not Verified.");
+          //form.reset();
+        }
+      });
+  };
   return (
     <div>
       <h1 className="text-2xl font-bold text-center">View Handover Details</h1>
-      <div className="overflow-x-auto px-6 py-6">
-        <table className="table table-auto w-full border-2 border-primary">
+      <div className="overflow-y-auto px-6 py-6">
+        <table className="table table-fixed w-full border-2 border-primary">
           <tbody>
             <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Sender Name</th>
@@ -37,6 +90,19 @@ const ViewHandoverDetails = () => {
               <th className="border-2 border-primary">Sender Address</th>
               <td className="">{data?.senderAddress}</td>
             </tr>
+            {/* {data?.senderPublicKey && (
+              <tr className=" border-2 border-primary">
+                <th className="border-2 border-primary">Sender Public Key</th>
+                <td className="">
+                  <button
+                    onClick={handleSenderSignatureCopy}
+                    className="ml-5 btn btn-sm btn-primary"
+                  >
+                    Copy to clipboard
+                  </button>
+                </td>
+              </tr>
+            )} */}
             <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Receiver Name</th>
               <td className="border-2 border-primary">{data?.receiverName}</td>
@@ -79,12 +145,29 @@ const ViewHandoverDetails = () => {
             </tr>
             <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Sender Signature</th>
-              <td className="">{data?.senderSignature}</td>
+              <td className="">
+                {/* {data?.senderSignature} */}
+                <button
+                  onClick={handleSenderSignatureCopy}
+                  className="ml-5 btn btn-sm btn-primary"
+                >
+                  Copy to clipboard
+                </button>
+              </td>
             </tr>
             <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Receiver Signature</th>
-              <td className="">{data?.receiverSignature}</td>
+              <td className="">
+                {/* {data?.receiverSignature}...{" "} */}
+                <button
+                  onClick={handleReceiverSignatureCopy}
+                  className="ml-5 btn btn-sm btn-primary"
+                >
+                  Copy to clipboard
+                </button>
+              </td>
             </tr>
+
             <tr className="border-2 border-primary">
               <th className="border-2 border-primary">Drug Handover Status</th>
               <td className="">
@@ -98,11 +181,59 @@ const ViewHandoverDetails = () => {
           </tbody>
         </table>
       </div>
-      <div className="py-6 flex justify-center gap-6">
-        <button className="btn btn-success">Back</button>
-        <button onClick={() => window.print()} className="btn btn-primary">
-          Print
-        </button>
+      <div className="py-6">
+        <h1 className="font-bold text-center text-primary text-3xl py-4">
+          Verify Signature
+        </h1>
+        <div className="flex justify-center">
+          <form
+            onSubmit={handleSignatureVerify}
+            className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100"
+          >
+            <div className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Address</span>
+                </label>
+                <input
+                  type="text"
+                  name="userAddress"
+                  placeholder="Address"
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Digital Signature</span>
+                </label>
+                <input
+                  type="text"
+                  name="userSignature"
+                  placeholder="Digital Signature"
+                  className="input input-bordered"
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Public Key</span>
+                </label>
+
+                <select
+                  name="userPublicKey"
+                  className="select select-bordered w-full"
+                >
+                  <option disabled>Choose the Public Key?</option>
+                  <option value={"sender"}>Sender Public Key</option>
+                  <option value={"receiver"}>Receiver Public Key</option>
+                </select>
+              </div>
+              <div className="form-control mt-6">
+                <button className="btn btn-primary">Verify</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

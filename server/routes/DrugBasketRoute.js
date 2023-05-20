@@ -6,7 +6,10 @@ router.get(
   "/drug-basket/drugs",
   DrugBasketController.getAllDrugsByManufacturer
 );
-router.get("/drug-basket/:drugId", DrugBasketController.searchDrugByDrugCode);
+router.get(
+  "/drug-basket/search/:drugId",
+  DrugBasketController.searchDrugByDrugCode
+);
 router.get("/drug-basket/drug/:id", DrugBasketController.searchDrugById);
 router.delete("/drug-basket/drug/:id", DrugBasketController.deleteDrugByID);
 router.patch("/drug-basket/drug/:id", DrugBasketController.updateDrugByID);

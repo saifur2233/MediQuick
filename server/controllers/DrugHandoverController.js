@@ -22,7 +22,7 @@ exports.addDrugHandoverData = catchAsync(async (req, res, next) => {
   } = req.body;
 
   const receiverSignature = "";
-  const receiverPublicKey = "";
+  const receiverPublicKey = {};
   const drugHandover = new DrugHandover({
     _id: new mongoose.Types.ObjectId(),
     senderName,
@@ -74,9 +74,12 @@ exports.getDrugHandover = catchAsync(async (req, res, next) => {
 });
 
 exports.attachSignatureReceiver = catchAsync(async (req, res, next) => {
-  const { id, receiverSignature } = req.body;
+  const { id, receiverSignature, receiverPublicKey } = req.body;
   const filter = { _id: id };
-  const update = { receiverSignature: receiverSignature };
+  const update = {
+    receiverPublicKey: receiverPublicKey,
+    receiverSignature: receiverSignature,
+  };
   return DrugHandover.findOneAndUpdate(filter, update, {
     new: true,
   })

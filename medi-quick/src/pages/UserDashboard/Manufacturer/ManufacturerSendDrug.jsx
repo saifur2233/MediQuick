@@ -11,6 +11,7 @@ const ManufacturerSendDrug = () => {
   const senderName = user[0]?.name;
   const senderAddress = user[0]?.address;
   const senderType = user[0]?.userType;
+  const senderPublicKey = user[0]?.publicKey;
 
   const navigate = useNavigate();
 
@@ -41,15 +42,15 @@ const ManufacturerSendDrug = () => {
   }, []);
   //console.log(state);
 
-  useEffect(() => {
-    const { contract } = state;
-    async function readData() {
-      const data = await contract.methods.getTransaction().call();
-      setData(data);
-    }
-    contract && readData();
-  }, [state]);
-  console.log(data);
+  // useEffect(() => {
+  //   const { contract } = state;
+  //   async function readData() {
+  //     const data = await contract.methods.getTransaction().call();
+  //     setData(data);
+  //   }
+  //   contract && readData();
+  // }, [state]);
+  // console.log(data);
 
   const writeData = async (
     drugName,
@@ -61,7 +62,7 @@ const ManufacturerSendDrug = () => {
     await contract.methods
       .addTransaction(drugName, drugCode, senderSignature, receiverAddress)
       .send({
-        from: "0x6A27512E811a2993d56C9Ef752f5Cf493c6E3c47",
+        from: "0x3BAE71A8fE21332aB6Eb0b37ae452f013D5ec22a",
         gas: "1000000",
       });
     window.location.reload();
@@ -86,7 +87,7 @@ const ManufacturerSendDrug = () => {
     const form = event.target;
     const drugId = form.drugId.value;
 
-    fetch(`http://localhost:4000/api/v1/drug-basket/${drugId}`)
+    fetch(`http://localhost:4000/api/v1/drug-basket/search/${drugId}`)
       .then((res) => res.json())
       .then((result) => {
         const data = result.drug;
@@ -116,6 +117,7 @@ const ManufacturerSendDrug = () => {
       senderName,
       senderType,
       senderAddress,
+      senderPublicKey,
       receiverName,
       receiverType,
       receiverAddress,
@@ -140,14 +142,14 @@ const ManufacturerSendDrug = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        //console.log(data);
-        writeData(drugName, drugCode, senderSignature, receiverAddress)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        console.log(data);
+        // writeData(drugName, drugCode, senderSignature, receiverAddress)
+        //   .then((res) => {
+        //     console.log(res);
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   });
         toast.success("Drug Handover Data added.");
         form.reset();
       });
@@ -191,10 +193,10 @@ const ManufacturerSendDrug = () => {
                   </label>
                   <input
                     type="text"
-                    value={senderName}
+                    defaultValue={senderName}
                     placeholder="Sender Name"
                     className="input input-bordered"
-                    readOnly
+                    disabled
                   />
                 </div>
                 <div className="form-control w-1/2">
@@ -203,10 +205,10 @@ const ManufacturerSendDrug = () => {
                   </label>
                   <input
                     type="text"
-                    value={senderType}
+                    defaultValue={senderType}
                     placeholder="Sender Name"
                     className="input input-bordered"
-                    readOnly
+                    disabled
                   />
                 </div>
               </div>
@@ -216,10 +218,10 @@ const ManufacturerSendDrug = () => {
                 </label>
                 <input
                   type="text"
-                  value={senderAddress}
+                  defaultValue={senderAddress}
                   placeholder="Sender Address"
                   className="input input-bordered"
-                  readOnly
+                  disabled
                 />
               </div>
               <div className="flex gap-3">
@@ -269,10 +271,11 @@ const ManufacturerSendDrug = () => {
                 <input
                   type="text"
                   name="drugName"
-                  value={drugDetials[0]?.drugName}
+                  defaultValue={drugDetials[0]?.drugName}
                   placeholder="Drug Name"
                   className="input input-bordered"
                   required
+                  readOnly
                 />
               </div>
               <div className="form-control">
@@ -281,11 +284,12 @@ const ManufacturerSendDrug = () => {
                 </label>
                 <input
                   type="text"
-                  value={drugDetials[0]?.drugCode}
+                  defaultValue={drugDetials[0]?.drugCode}
                   required
                   placeholder="#jrej456k"
                   name="drugCode"
                   className="input input-bordered"
+                  readOnly
                 />
               </div>
               <div className="flex gap-3">
@@ -296,10 +300,11 @@ const ManufacturerSendDrug = () => {
                   <input
                     type="text"
                     name="drugDosage"
-                    value={drugDetials[0]?.drugDosage}
+                    defaultValue={drugDetials[0]?.drugDosage}
                     placeholder="Drug Dosage"
                     className="input input-bordered"
                     required
+                    readOnly
                   />
                 </div>
                 <div className="form-control w-1/2">
@@ -309,7 +314,7 @@ const ManufacturerSendDrug = () => {
                   <input
                     type="text"
                     name="drugQuantity"
-                    value={drugDetials[0]?.drugQuantity}
+                    defaultValue={drugDetials[0]?.drugQuantity}
                     placeholder="Drug Quantity"
                     className="input input-bordered"
                   />
@@ -323,10 +328,11 @@ const ManufacturerSendDrug = () => {
                   <input
                     type="text"
                     name="mfgDate"
-                    value={drugDetials[0]?.mfgDate}
+                    defaultValue={drugDetials[0]?.mfgDate}
                     placeholder="Mfg_Date"
                     className="input input-bordered"
                     required
+                    readOnly
                   />
                 </div>
                 <div className="form-control w-1/2">
@@ -336,10 +342,11 @@ const ManufacturerSendDrug = () => {
                   <input
                     type="text"
                     name="expDate"
-                    value={drugDetials[0]?.expDate}
+                    defaultValue={drugDetials[0]?.expDate}
                     placeholder="Exp_Date"
                     className="input input-bordered"
                     required
+                    readOnly
                   />
                 </div>
               </div>
@@ -351,7 +358,7 @@ const ManufacturerSendDrug = () => {
                   <input
                     type="text"
                     required
-                    value={currentTime}
+                    defaultValue={currentTime}
                     placeholder="Date & Time"
                     className="input input-bordered"
                   />
@@ -370,8 +377,7 @@ const ManufacturerSendDrug = () => {
                 <label className="input-group">
                   <input
                     type="text"
-                    value={senderSignature}
-                    readOnly
+                    defaultValue={senderSignature}
                     required
                     placeholder="Sender Digital Signature"
                     className="input input-bordered"
