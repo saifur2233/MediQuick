@@ -1,5 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const DrugHandover = require("../models/DrugHandover");
+const DrugBasket = require("../models/DrugBasket");
 const catchAsync = require("../utils/catchAsync");
 
 exports.addDrugHandoverData = catchAsync(async (req, res, next) => {
@@ -21,8 +22,32 @@ exports.addDrugHandoverData = catchAsync(async (req, res, next) => {
     senderSignature,
   } = req.body;
 
+  const drugBasket = await DrugBasket.findOne({
+    userAddress: senderAddress,
+    drugCode: drugCode,
+  });
+  //console.log(drugBasket);
+  if (!drugBasket) {
+    return null;
+  }
+  if (drugBasket.drugQuantity === "0") {
+    return null;
+  }
+  if (drugBasket.drugQuantity < drugQuantity) {
+    return null;
+  }
+  //console.log(drugBasket[0].drugQuantity);
+  const quantity = drugBasket.drugQuantity - drugQuantity;
+  const filter = { userAddress: senderAddress, drugCode: drugCode };
+  const update = { drugQuantity: quantity };
+  //console.log("Quantity: ", quantity);
+  await DrugBasket.findOneAndUpdate(filter, update, {
+    new: true,
+  });
+
   const receiverSignature = "";
   const receiverPublicKey = {};
+  const status = "Incomplete";
   const drugHandover = new DrugHandover({
     _id: new mongoose.Types.ObjectId(),
     senderName,
@@ -42,12 +67,29 @@ exports.addDrugHandoverData = catchAsync(async (req, res, next) => {
     currentTime,
     senderSignature,
     receiverSignature,
+    status,
   });
 
   return drugHandover
     .save()
     .then((data) => res.status(201).json({ data }))
     .catch((error) => res.status(500).json({ error }));
+});
+
+exports.checkDrugIsExist = catchAsync(async (req, res, next) => {
+  const { senderAddress, drugCode } = req.body;
+  let result = false;
+  const drugBasket = await DrugBasket.findOne({
+    userAddress: senderAddress,
+    drugCode: drugCode,
+  });
+  if (!drugBasket) {
+    return res.status(200).send(result);
+  }
+  if (drugBasket) {
+    result = true;
+    return res.status(200).send(result);
+  }
 });
 
 exports.getAllSenderDrugHandoverData = catchAsync(async (req, res, next) => {
@@ -79,6 +121,7 @@ exports.attachSignatureReceiver = catchAsync(async (req, res, next) => {
   const update = {
     receiverPublicKey: receiverPublicKey,
     receiverSignature: receiverSignature,
+    status: "Complete",
   };
   return DrugHandover.findOneAndUpdate(filter, update, {
     new: true,

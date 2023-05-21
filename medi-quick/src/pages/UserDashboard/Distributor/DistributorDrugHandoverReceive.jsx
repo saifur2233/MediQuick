@@ -7,6 +7,9 @@ import { toast } from "react-hot-toast";
 
 const DistributorDrugHandoverReceive = () => {
   const { user } = useContext(AuthContext);
+  const reciverName = user[0]?.name;
+  const reciverType = user[0]?.userType;
+  const receiverEmail = user[0]?.email;
   const reciverAddress = user[0]?.address;
   const receiverSignature = user[0]?.digitalSignature;
   const receiverPublicKey = user[0]?.publicKey;
@@ -53,6 +56,36 @@ const DistributorDrugHandoverReceive = () => {
         toast.error("Signature didn't Attach.");
       });
   };
+
+  const handleDrugAddToBasket = (data) => {
+    const drug = {
+      userName: reciverName,
+      userType: reciverType,
+      userEmail: receiverEmail,
+      userAddress: reciverAddress,
+      drugName: data?.drugName,
+      drugCode: data?.drugCode,
+      drugDosage: data?.drugDosage,
+      drugQuantity: data?.drugQuantity,
+      mfgDate: data?.mfgDate,
+      expDate: data?.expDate,
+    };
+
+    fetch("http://localhost:4000/api/v1/drug-basket/wallet/addDrug", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(drug),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(data);
+        toast.success("Drug successfully added.");
+
+        //navigate("/dashboard/manuViewDrugDetails");
+      });
+  };
   return (
     <div>
       <div>
@@ -93,7 +126,10 @@ const DistributorDrugHandoverReceive = () => {
                     </td>
                     <td>
                       <div className="flex gap-2">
-                        <button className="btn btn-square btn-success btn-outline">
+                        <button
+                          onClick={() => handleDrugAddToBasket(data)}
+                          className="btn btn-square btn-success btn-outline"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="inline-block w-8 h-8 stroke-current"

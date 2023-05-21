@@ -18,5 +18,8 @@ router.post(
   "/Handoverdata/receiver/attachSignature",
   DrugHandoverController.attachSignatureReceiver
 );
-
+router.post(
+  "/Handoverdata/drug/check",
+  DrugHandoverController.checkDrugIsExist
+);
 module.exports = router;

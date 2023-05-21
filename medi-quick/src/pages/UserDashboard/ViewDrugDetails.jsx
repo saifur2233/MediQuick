@@ -32,10 +32,14 @@ const ViewDrugDetails = () => {
 
   const handleDrugUpdate = (event) => {
     event.preventDefault();
+    const form = event.target;
+    const drugname = form.drugname.value;
+    const drugdosage = form.drugdosage.value;
+    const drugquantity = form.drugquantity.value;
     const updateObj = {
-      drugName: name,
-      drugDosage: dosage,
-      drugQuantity: quantity,
+      drugName: drugname,
+      drugDosage: drugdosage,
+      drugQuantity: drugquantity,
     };
     fetch(`http://localhost:4000/api/v1/drug-basket/drug/${drug._id}`, {
       method: "PATCH",
@@ -98,7 +102,7 @@ const ViewDrugDetails = () => {
               </label>
               <input
                 type="text"
-                onChange={(e) => setName(e.target.value)}
+                name="drugname"
                 defaultValue={drug?.drugName}
                 className="input input-bordered"
               />
@@ -109,7 +113,7 @@ const ViewDrugDetails = () => {
               </label>
               <input
                 type="text"
-                onChange={(e) => setDosage(e.target.value)}
+                name="drugdosage"
                 defaultValue={drug?.drugDosage}
                 className="input input-bordered"
               />
@@ -120,7 +124,7 @@ const ViewDrugDetails = () => {
               </label>
               <input
                 type="text"
-                onChange={(e) => setQuantity(e.target.value)}
+                name="drugquantity"
                 defaultValue={drug?.drugQuantity}
                 className="input input-bordered"
               />

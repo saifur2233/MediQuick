@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import Loading from "../../../shared/Loading/Loading";
-import { useQuery } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/UserContext";
+import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../shared/Loading/Loading";
+import { toast } from "react-hot-toast";
 
-const ManuViewDrugDetails = () => {
+const TransportAgencyViewDrug = () => {
   const { user } = useContext(AuthContext);
   const address = user[0]?.address;
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const ManuViewDrugDetails = () => {
     queryKey: ["allDrugs"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:4000/api/v1/drug-basket/manufacturer/drugs/${address}`
+        `http://localhost:4000/api/v1/drug-basket/transportagency/drugs/${address}`
       );
       const data = await res.json();
       return data;
@@ -40,16 +40,14 @@ const ManuViewDrugDetails = () => {
   return (
     <div>
       <div>
-        <h1 className="font-bold text-3xl text-center">
-          Menufacturer View Drugs Details
-        </h1>
+        <h1 className="font-bold text-3xl text-center">View Drugs Details</h1>
         <div className="py-8">
           <div className="overflow-x-auto">
             <table className="table table-zebra w-full">
               <thead>
                 <tr>
                   <th>Index</th>
-                  <th>Menu. Name</th>
+
                   <th>DrugName</th>
                   <th>Code</th>
                   <th>Dosage</th>
@@ -63,7 +61,7 @@ const ManuViewDrugDetails = () => {
                 {allDrugs.map((drug, i) => (
                   <tr key={drug._id}>
                     <th>{i + 1}</th>
-                    <td>{drug?.userName}</td>
+
                     <td>{drug?.drugName}</td>
                     <td>{drug?.drugCode}</td>
                     <td>{drug?.drugDosage}</td>
@@ -124,4 +122,4 @@ const ManuViewDrugDetails = () => {
   );
 };
 
-export default ManuViewDrugDetails;
+export default TransportAgencyViewDrug;

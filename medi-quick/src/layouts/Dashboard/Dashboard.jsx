@@ -82,10 +82,16 @@ const Dashboard = () => {
                     View Drug Request
                   </Link>
                 </li>
+                <li>
+                  <Link to="/dashboard/qrCode">Generate QR Code</Link>
+                </li>
               </>
             )}
             {user[0]?.userType === "Distributor" && (
               <>
+                <li>
+                  <Link to="/dashboard/distributorViewDrug">Drugs Wallet</Link>
+                </li>
                 <li>
                   <Link to="/dashboard/distributorSendDrug">Send Drugs</Link>
                 </li>
@@ -119,6 +125,9 @@ const Dashboard = () => {
             {user[0]?.userType === "Retailer" && (
               <>
                 <li>
+                  <Link to="/dashboard/retailerViewDrug">Drugs Wallet</Link>
+                </li>
+                <li>
                   <Link to="/dashboard/retailerReceiveHandover">
                     Receive Drug Handover
                   </Link>
@@ -142,6 +151,11 @@ const Dashboard = () => {
             )}
             {user[0]?.userType === "TransportAgency" && (
               <>
+                <li>
+                  <Link to="/dashboard/transportAgencyViewDrug">
+                    Drugs Wallet
+                  </Link>
+                </li>
                 <li>
                   <Link to="/dashboard/transportAgencySendDrug">
                     Send Drugs

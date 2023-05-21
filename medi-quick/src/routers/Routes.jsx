@@ -40,6 +40,10 @@ import TransportAgencySendDrugReq from "../pages/UserDashboard/TransportAgency/T
 import TransportAgencyViewSendDrugReq from "../pages/UserDashboard/TransportAgency/TransportAgencyViewSendDrugReq";
 import AllUserInfo from "../pages/UserDashboard/AllUserInfo";
 import ViewDrugDetails from "../pages/UserDashboard/ViewDrugDetails";
+import DistributorViewDrug from "../pages/UserDashboard/Distributor/DistributorViewDrug";
+import TransportAgencyViewDrug from "../pages/UserDashboard/TransportAgency/TransportAgencyViewDrug";
+import RetailerViewDrug from "../pages/UserDashboard/Retailer/RetailerViewDrug";
+import ManuGenerateQR from "../pages/UserDashboard/Manufacturer/ManuGenerateQR";
 
 export const router = createBrowserRouter([
   {
@@ -133,6 +137,14 @@ export const router = createBrowserRouter([
         element: <ManuViewDrugRequest></ManuViewDrugRequest>,
       },
       {
+        path: "/dashboard/qrCode",
+        element: <ManuGenerateQR></ManuGenerateQR>,
+      },
+      {
+        path: "/dashboard/distributorViewDrug",
+        element: <DistributorViewDrug></DistributorViewDrug>,
+      },
+      {
         path: "/dashboard/distributorSendDrug",
         element: <DistributorSendDrug></DistributorSendDrug>,
       },
@@ -159,6 +171,10 @@ export const router = createBrowserRouter([
         element: <DistributorViewDrugRequest></DistributorViewDrugRequest>,
       },
       {
+        path: "/dashboard/retailerViewDrug",
+        element: <RetailerViewDrug></RetailerViewDrug>,
+      },
+      {
         path: "/dashboard/retailerReceiveHandover",
         element: <RetailerDrugHandoverReceive></RetailerDrugHandoverReceive>,
       },
@@ -173,6 +189,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/retailerViewDrugRequest",
         element: <RetailerViewDrugRequest></RetailerViewDrugRequest>,
+      },
+      {
+        path: "/dashboard/transportAgencyViewDrug",
+        element: <TransportAgencyViewDrug></TransportAgencyViewDrug>,
       },
       {
         path: "/dashboard/transportAgencySendDrug",

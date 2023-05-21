@@ -20,6 +20,7 @@ const DrugHandoverModelSchema = new Schema({
   currentTime: String,
   senderSignature: String,
   receiverSignature: String,
+  status: String,
 });
 
 const DrugHandoverModel = mongoose.model(

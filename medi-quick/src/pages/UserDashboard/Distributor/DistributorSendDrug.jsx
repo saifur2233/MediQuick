@@ -34,13 +34,13 @@ const DistributorSendDrug = () => {
     event.preventDefault();
     const form = event.target;
     const drugId = form.drugId.value;
-    fetch(`http://localhost:4000/api/v1/drug-basket/${drugId}`)
+    fetch(`http://localhost:4000/api/v1/drug-basket/search/${drugId}`)
       .then((res) => res.json())
       .then((result) => {
         const data = result.drug;
         if (data.length === 0) {
           toast.error("Drug details not found.");
-        } else if (data.length === 1) {
+        } else if (data.length >= 1) {
           setDrugDetials(data);
           toast.success("Drug details found.");
         }
@@ -77,20 +77,41 @@ const DistributorSendDrug = () => {
       senderSignature,
     };
 
-    console.log(SupplyChainObj);
+    //console.log(SupplyChainObj);
 
-    fetch("http://localhost:4000/api/v1/drug-supplychain/addHandover", {
+    fetch("http://localhost:4000/api/v1/Handoverdata/drug/check", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(SupplyChainObj),
+      body: JSON.stringify({ senderAddress, drugCode }),
     })
       .then((res) => res.json())
       .then((data) => {
-        //console.log(data);
-        toast.success("Drug Handover Data added.");
-        form.reset();
+        if (data === false) {
+          toast.error("Drug is not Exist in System");
+        } else {
+          fetch("http://localhost:4000/api/v1/drug-supplychain/addHandover", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(SupplyChainObj),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              // writeData(drugName, drugCode, senderSignature, receiverAddress)
+              //   .then((res) => {
+              //     console.log(res);
+              //   })
+              //   .catch((error) => {
+              //     console.log(error);
+              //   });
+              toast.success("Drug Handover Data added.");
+              form.reset();
+            });
+        }
       });
   };
 
@@ -112,7 +133,7 @@ const DistributorSendDrug = () => {
               <div className="form-control">
                 <input
                   type="text"
-                  value={decodedResults}
+                  defaultValue={decodedResults}
                   name="drugId"
                   placeholder="Search with Drug Code"
                   className="input input-bordered"
@@ -135,7 +156,7 @@ const DistributorSendDrug = () => {
                     value={senderName}
                     placeholder="Sender Name"
                     className="input input-bordered"
-                    readOnly
+                    disabled
                   />
                 </div>
                 <div className="form-control w-1/2">
@@ -147,7 +168,7 @@ const DistributorSendDrug = () => {
                     value={senderType}
                     placeholder="Sender Name"
                     className="input input-bordered"
-                    readOnly
+                    disabled
                   />
                 </div>
               </div>
@@ -160,7 +181,7 @@ const DistributorSendDrug = () => {
                   value={senderAddress}
                   placeholder="Sender Address"
                   className="input input-bordered"
-                  readOnly
+                  disabled
                 />
               </div>
               <div className="flex gap-3">
@@ -210,7 +231,7 @@ const DistributorSendDrug = () => {
                 <input
                   type="text"
                   name="drugName"
-                  value={drugDetials[0]?.drugName}
+                  defaultValue={drugDetials[0]?.drugName}
                   placeholder="Drug Name"
                   className="input input-bordered"
                   required
@@ -222,7 +243,7 @@ const DistributorSendDrug = () => {
                 </label>
                 <input
                   type="text"
-                  value={drugDetials[0]?.drugCode}
+                  defaultValue={drugDetials[0]?.drugCode}
                   required
                   placeholder="#jrej456k"
                   name="drugCode"
@@ -237,7 +258,7 @@ const DistributorSendDrug = () => {
                   <input
                     type="text"
                     name="drugDosage"
-                    value={drugDetials[0]?.drugDosage}
+                    defaultValue={drugDetials[0]?.drugDosage}
                     placeholder="Drug Dosage"
                     className="input input-bordered"
                     required
@@ -250,7 +271,7 @@ const DistributorSendDrug = () => {
                   <input
                     type="text"
                     name="drugQuantity"
-                    value={drugDetials[0]?.drugQuantity}
+                    defaultValue={drugDetials[0]?.drugQuantity}
                     placeholder="Drug Quantity"
                     className="input input-bordered"
                   />
@@ -264,7 +285,7 @@ const DistributorSendDrug = () => {
                   <input
                     type="text"
                     name="mfgDate"
-                    value={drugDetials[0]?.mfgDate}
+                    defaultValue={drugDetials[0]?.mfgDate}
                     placeholder="Mfg_Date"
                     className="input input-bordered"
                     required
@@ -277,7 +298,7 @@ const DistributorSendDrug = () => {
                   <input
                     type="text"
                     name="expDate"
-                    value={drugDetials[0]?.expDate}
+                    defaultValue={drugDetials[0]?.expDate}
                     placeholder="Exp_Date"
                     className="input input-bordered"
                     required

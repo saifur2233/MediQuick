@@ -2,9 +2,25 @@ const router = require("express").Router();
 const DrugBasketController = require("../controllers/DrugBasketController");
 
 router.post("/drug-basket/addDrug", DrugBasketController.addDrug);
+router.post(
+  "/drug-basket/wallet/addDrug",
+  DrugBasketController.addDrugToWallet
+);
 router.get(
-  "/drug-basket/drugs",
+  "/drug-basket/manufacturer/drugs/:address",
   DrugBasketController.getAllDrugsByManufacturer
+);
+router.get(
+  "/drug-basket/distributor/drugs/:address",
+  DrugBasketController.getAllDrugsByDistributor
+);
+router.get(
+  "/drug-basket/retailer/drugs/:address",
+  DrugBasketController.getAllDrugsByRetailer
+);
+router.get(
+  "/drug-basket/transportagency/drugs/:address",
+  DrugBasketController.getAllDrugsByTransportAgency
 );
 router.get(
   "/drug-basket/search/:drugId",
