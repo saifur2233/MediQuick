@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/UserContext";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
+import Web3 from "web3";
+import DrugSupplyChain from "./../../../contracts/DrugSupplyChain.json";
 import Html5QrcodePlugin from "../../Customer/Html5QrcodePlugin";
 
 const RetailerSendDrug = () => {
@@ -18,6 +19,54 @@ const RetailerSendDrug = () => {
   const [currentTime, setCurrentTime] = useState("");
   const [senderSignature, setSenderSignature] = useState(null);
   const [decodedResults, setDecodedResults] = useState("");
+  const [state, setState] = useState({ web3: null, contract: null });
+  const [data, setData] = useState("nil");
+
+  // provider
+  useEffect(() => {
+    const provider = new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545");
+    async function template() {
+      const web3 = new Web3(provider);
+      //console.log(web3);
+      // to interact with smart contact we require 1. ABI 2. Contract address
+      const networkId = await web3.eth.net.getId();
+      const deployedNetwork = DrugSupplyChain.networks[networkId];
+      //console.log(deployedNetwork.address);
+      const contract = new web3.eth.Contract(
+        DrugSupplyChain.abi,
+        deployedNetwork.address
+      );
+      setState({ web3: web3, contract: contract });
+    }
+    provider && template();
+  }, []);
+  //console.log(state);
+
+  useEffect(() => {
+    const { contract } = state;
+    async function readData() {
+      const data = await contract.methods.getTransaction().call();
+      setData(data);
+    }
+    contract && readData();
+  }, [state]);
+  console.log(data);
+
+  const writeData = async (
+    drugName,
+    drugCode,
+    senderSignature,
+    receiverAddress
+  ) => {
+    const { contract } = state;
+    await contract.methods
+      .addTransaction(drugName, drugCode, senderSignature, receiverAddress)
+      .send({
+        from: senderAddress,
+        gas: "1000000",
+      });
+    //window.location.reload();
+  };
 
   const onNewScanResult = (decodedText, decodedResults) => {
     console.log("Result: ", decodedResults);
@@ -105,7 +154,13 @@ const RetailerSendDrug = () => {
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
-
+              writeData(drugName, drugCode, senderSignature, receiverAddress)
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
               toast.success("Drug Handover Data added.");
               form.reset();
             });
