@@ -26,6 +26,28 @@ const Profile = () => {
     toast.success("Copy to clipboard");
   };
 
+  const handleUpdateSignature = () => {
+    const address = user[0]?.address;
+    const id = user[0]?._id;
+    console.log(user[0]?._id);
+    console.log(user[0]?.digitalSignature);
+
+    fetch(`http://localhost:4000/api/v1/user/update-signature/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ address }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Signature Updated");
+        //navigate("/dashboard");
+        window.location.reload();
+      });
+  };
+
   const handleConnectMatamask = async () => {
     //console.log("Hello from metamask");
     try {
@@ -81,7 +103,10 @@ const Profile = () => {
                 <p>Phone Number: {user[0]?.phone}</p>
                 <div className="card-actions justify-end py-4">
                   <div className="flex justify-center gap-3">
-                    <button onClick={handleLogout} className="btn btn-success">
+                    <button
+                      onClick={() => navigate("/dashboard/user/update-profile")}
+                      className="btn btn-success"
+                    >
                       Update Profile
                     </button>
                     <button onClick={handleLogout} className="btn btn-primary">
@@ -168,6 +193,12 @@ const Profile = () => {
               Copy to clipboard
             </label>
           </div>
+          <button
+            onClick={handleUpdateSignature}
+            className="btn btn-primary ml-3"
+          >
+            Update
+          </button>
         </div>
       </div>
     </div>

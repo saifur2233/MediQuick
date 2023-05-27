@@ -8,6 +8,7 @@ import { AuthContext } from "../../../context/UserContext";
 const ManuViewDrugDetails = () => {
   const { user } = useContext(AuthContext);
   const address = user[0]?.address;
+  console.log(address);
   const navigate = useNavigate();
   const {
     data: allDrugs = [],
@@ -23,7 +24,7 @@ const ManuViewDrugDetails = () => {
       return data;
     },
   });
-  console.log(allDrugs);
+  //console.log(allDrugs);
   if (isLoading) {
     return <Loading></Loading>;
   }

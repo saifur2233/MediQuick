@@ -42,15 +42,15 @@ const ManufacturerSendDrug = () => {
   }, []);
   //console.log(state);
 
-  // useEffect(() => {
-  //   const { contract } = state;
-  //   async function readData() {
-  //     const data = await contract.methods.getTransaction().call();
-  //     setData(data);
-  //   }
-  //   contract && readData();
-  // }, [state]);
-  // console.log(data);
+  useEffect(() => {
+    const { contract } = state;
+    async function readData() {
+      const data = await contract.methods.getTransaction().call();
+      setData(data);
+    }
+    contract && readData();
+  }, [state]);
+  console.log(data);
 
   const writeData = async (
     drugName,
@@ -62,10 +62,10 @@ const ManufacturerSendDrug = () => {
     await contract.methods
       .addTransaction(drugName, drugCode, senderSignature, receiverAddress)
       .send({
-        from: "0x3BAE71A8fE21332aB6Eb0b37ae452f013D5ec22a",
+        from: "0x22c1E897eD43054DC255ED1668445b9c766B9704",
         gas: "1000000",
       });
-    window.location.reload();
+    //window.location.reload();
   };
 
   const onNewScanResult = (decodedText, decodedResults) => {
@@ -155,13 +155,13 @@ const ManufacturerSendDrug = () => {
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
-              // writeData(drugName, drugCode, senderSignature, receiverAddress)
-              //   .then((res) => {
-              //     console.log(res);
-              //   })
-              //   .catch((error) => {
-              //     console.log(error);
-              //   });
+              writeData(drugName, drugCode, senderSignature, receiverAddress)
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
               toast.success("Drug Handover Data added.");
               form.reset();
             });

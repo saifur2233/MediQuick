@@ -82,36 +82,72 @@ exports.addDrugToWallet = catchAsync(async (req, res, next) => {
       drugQuantity: quantity,
       updated_At: new Date().toLocaleString(),
     };
-    await Drug.findOneAndUpdate(filter, update, {
+    return Drug.findOneAndUpdate(filter, update, {
       new: true,
-    });
+    })
+      .then((drugs) => res.status(200).send(drugs))
+      .catch((error) => res.status(500).json({ error }));
   }
 });
 
 exports.getAllDrugsByManufacturer = catchAsync(async (req, res, next) => {
-  const { address } = req.params.address;
-  return Drug.find({ address: address, userType: "Manufacturer" })
+  const address = req.params.address;
+
+  return Drug.find({
+    $and: [
+      {
+        userAddress: address,
+      },
+      {
+        userType: "Manufacturer",
+      },
+    ],
+  })
     .then((drugs) => res.status(200).send(drugs))
     .catch((error) => res.status(500).json({ error }));
 });
 
 exports.getAllDrugsByDistributor = catchAsync(async (req, res, next) => {
-  const { address } = req.params.address;
-  return Drug.find({ address: address, userType: "Distributor" })
+  return Drug.find({
+    $and: [
+      {
+        userAddress: address,
+      },
+      {
+        userType: "Distributor",
+      },
+    ],
+  })
     .then((drugs) => res.status(200).send(drugs))
     .catch((error) => res.status(500).json({ error }));
 });
 
 exports.getAllDrugsByRetailer = catchAsync(async (req, res, next) => {
-  const { address } = req.params.address;
-  return Drug.find({ address: address, userType: "Retailer" })
+  return Drug.find({
+    $and: [
+      {
+        userAddress: address,
+      },
+      {
+        userType: "Retailer",
+      },
+    ],
+  })
     .then((drugs) => res.status(200).send(drugs))
     .catch((error) => res.status(500).json({ error }));
 });
 
 exports.getAllDrugsByTransportAgency = catchAsync(async (req, res, next) => {
-  const { address } = req.params.address;
-  return Drug.find({ address: address, userType: "TransportAgency" })
+  return Drug.find({
+    $and: [
+      {
+        userAddress: address,
+      },
+      {
+        userType: "TransportAgency",
+      },
+    ],
+  })
     .then((drugs) => res.status(200).send(drugs))
     .catch((error) => res.status(500).json({ error }));
 });

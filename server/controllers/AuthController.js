@@ -259,3 +259,23 @@ exports.getUserByEmail = catchAsync(async (req, res, next) => {
     .then((user) => res.status(200).send(user))
     .catch((error) => res.status(500).json({ error }));
 });
+
+exports.updateUserSignature = catchAsync(async (req, res, next) => {
+  const id = req.params.id;
+  const address = req.body.address;
+  const { key, publicKey, signature } = generateSinature(address);
+  const digitalSignature = signature;
+  const privatekey = key.secret().toJSON();
+
+  const update = {
+    digitalSignature: digitalSignature,
+    publicKey: publicKey,
+    privatekey: privatekey.data,
+  };
+
+  return User.findByIdAndUpdate(id, update, {
+    new: true,
+  })
+    .then((user) => res.status(200).send(user))
+    .catch((error) => res.status(500).json({ error }));
+});

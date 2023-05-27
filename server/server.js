@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const config = require("./dbconfig/dbConfig");
 const AuthRoute = require("./routes/AuthRoute");
 const AdminRoute = require("./routes/AdminRoute");
+const UserRoute = require("./routes/UserRoute");
 const DrugBasketRoute = require("./routes/DrugBasketRoute");
 const CustomerRoute = require("./routes/CustomerRoute");
 const DrugHandoverRoute = require("./routes/DrugHandoverRoute");
@@ -58,6 +59,8 @@ app.get("/", function (req, res) {
 app.use("/api/v1", AuthRoute);
 //admin route
 app.use("/api/v1", AdminRoute);
+//user route
+app.use("/api/v1", UserRoute);
 //Drug Basket route
 app.use("/api/v1", DrugBasketRoute);
 //customer route

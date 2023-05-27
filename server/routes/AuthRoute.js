@@ -15,4 +15,7 @@ router.post(
   "/user/verify-signature",
   AuthController.verifyUserDigitalSignature
 );
+
+router.patch("/user/update-signature/:id", AuthController.updateUserSignature);
+
 module.exports = router;

@@ -44,6 +44,7 @@ import DistributorViewDrug from "../pages/UserDashboard/Distributor/DistributorV
 import TransportAgencyViewDrug from "../pages/UserDashboard/TransportAgency/TransportAgencyViewDrug";
 import RetailerViewDrug from "../pages/UserDashboard/Retailer/RetailerViewDrug";
 import ManuGenerateQR from "../pages/UserDashboard/Manufacturer/ManuGenerateQR";
+import UpdateProfile from "../pages/Auth/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Profile></Profile>,
+      },
+      {
+        path: "/dashboard/user/update-profile",
+        element: <UpdateProfile></UpdateProfile>,
       },
       {
         path: "/dashboard/user-register",

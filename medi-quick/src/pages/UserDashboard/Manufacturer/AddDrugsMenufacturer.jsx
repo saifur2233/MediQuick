@@ -61,7 +61,7 @@ const AddDrugsMenufacturer = () => {
       expDate,
     };
 
-    //console.log(drug);
+    console.log(drug);
 
     fetch("http://localhost:4000/api/v1/drug-basket/addDrug", {
       method: "POST",
