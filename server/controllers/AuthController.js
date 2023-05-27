@@ -96,7 +96,8 @@ exports.adminSearchByEmail = catchAsync(async (req, res, next) => {
 //user
 exports.userSignup = catchAsync(async (req, res, next) => {
   try {
-    const { name, address, email, password, userType, phone } = req.body;
+    const { name, address, email, password, userType, phone, certificate } =
+      req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const { key, publicKey, signature } = generateSinature(address);
     const digitalSignature = signature;
@@ -114,6 +115,7 @@ exports.userSignup = catchAsync(async (req, res, next) => {
       digitalSignature,
       publicKey,
       privatekey: privatekey.data,
+      certificate,
     });
     await user.save();
     res.status(200).json({

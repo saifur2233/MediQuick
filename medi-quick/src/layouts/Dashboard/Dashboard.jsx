@@ -128,6 +128,9 @@ const Dashboard = () => {
                   <Link to="/dashboard/retailerViewDrug">Drugs Wallet</Link>
                 </li>
                 <li>
+                  <Link to="/dashboard/retailerSendDrug">Send Drugs</Link>
+                </li>
+                <li>
                   <Link to="/dashboard/retailerReceiveHandover">
                     Receive Drug Handover
                   </Link>

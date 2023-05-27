@@ -37,7 +37,7 @@ exports.addDrugHandoverData = catchAsync(async (req, res, next) => {
     return null;
   }
   //console.log(drugBasket[0].drugQuantity);
-  const quantity = drugBasket.drugQuantity - drugQuantity;
+  const quantity = parseInt(drugBasket.drugQuantity) - parseInt(drugQuantity);
   const filter = { userAddress: senderAddress, drugCode: drugCode };
   const update = { drugQuantity: quantity };
   //console.log("Quantity: ", quantity);

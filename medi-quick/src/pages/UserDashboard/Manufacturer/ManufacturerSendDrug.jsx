@@ -62,7 +62,7 @@ const ManufacturerSendDrug = () => {
     await contract.methods
       .addTransaction(drugName, drugCode, senderSignature, receiverAddress)
       .send({
-        from: "0x22c1E897eD43054DC255ED1668445b9c766B9704",
+        from: senderAddress,
         gas: "1000000",
       });
     //window.location.reload();

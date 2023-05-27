@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const UserRegistration = () => {
   const [error, setError] = useState(null);
+  const [isManufacturer, setIsManufacturer] = useState("");
+  const [certificate, setCertificate] = useState("");
 
   const navigate = useNavigate();
   const [userId, setUserId] = useState("");
@@ -21,6 +23,7 @@ const UserRegistration = () => {
     const password = form.password.value;
     const userType = form.userType.value;
     const phone = form.phone.value;
+
     const userObj = {
       name,
       address,
@@ -28,6 +31,7 @@ const UserRegistration = () => {
       password,
       userType,
       phone,
+      certificate,
     };
 
     if (password.length < 6) {
@@ -142,7 +146,11 @@ const UserRegistration = () => {
               <label className="label">
                 <span className="label-text">Enter UserType</span>
               </label>
-              <select name="userType" className="select select-bordered w-full">
+              <select
+                name="userType"
+                onChange={(e) => setIsManufacturer(e.target.value)}
+                className="select select-bordered w-full"
+              >
                 <option disabled>Select the user type</option>
                 <option value={"Manufacturer"}>Manufacturer</option>
                 <option value={"Distributor"}>Distributor</option>
@@ -162,6 +170,23 @@ const UserRegistration = () => {
                 required
               />
             </div>
+            {isManufacturer === "Manufacturer" && (
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">
+                    Enter Manufacturer Certificate Link
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Manufacturer Certificate Link"
+                  onChange={(e) => setCertificate(e.target.value)}
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+            )}
+
             <div className="form-control mt-6">
               <button className="btn btn-primary">Add to System</button>
             </div>

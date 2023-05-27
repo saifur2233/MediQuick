@@ -12,6 +12,7 @@ const UserModelSchema = new Schema({
   digitalSignature: String,
   publicKey: Object,
   privatekey: Object,
+  certificate: String,
 });
 
 const UserModel = mongoose.model("User", UserModelSchema);

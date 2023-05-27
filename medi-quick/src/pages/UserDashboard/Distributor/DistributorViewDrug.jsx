@@ -23,7 +23,7 @@ const DistributorViewDrug = () => {
       return data;
     },
   });
-  console.log(allDrugs);
+
   if (isLoading) {
     return <Loading></Loading>;
   }

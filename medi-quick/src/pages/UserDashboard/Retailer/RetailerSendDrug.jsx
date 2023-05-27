@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/UserContext";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import Html5QrcodePlugin from "../../Customer/Html5QrcodePlugin";
 
-const DistributorSendDrug = () => {
+const RetailerSendDrug = () => {
   const { user } = useContext(AuthContext);
   const senderName = user[0]?.name;
   const senderAddress = user[0]?.address;
@@ -37,7 +37,7 @@ const DistributorSendDrug = () => {
     event.preventDefault();
     const form = event.target;
     const drugId = form.drugId.value;
-
+    console.log(drugId);
     fetch(`http://localhost:4000/api/v1/drug-basket/search/${drugId}`)
       .then((res) => res.json())
       .then((result) => {
@@ -112,7 +112,6 @@ const DistributorSendDrug = () => {
         }
       });
   };
-
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
@@ -205,7 +204,7 @@ const DistributorSendDrug = () => {
                     className="select required select-bordered w-full max-w-xs"
                   >
                     <option disabled>Select Receiver Role</option>
-                    <option value="Distributor">Distributor</option>
+
                     <option value="Ratailer">Ratailer</option>
                     <option value="TransportAgency">TransportAgency</option>
                   </select>
@@ -355,4 +354,4 @@ const DistributorSendDrug = () => {
   );
 };
 
-export default DistributorSendDrug;
+export default RetailerSendDrug;

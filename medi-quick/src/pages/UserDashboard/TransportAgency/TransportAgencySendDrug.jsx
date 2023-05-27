@@ -1,6 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/UserContext";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 import Html5QrcodePlugin from "../../Customer/Html5QrcodePlugin";
 
 const TransportAgencySendDrug = () => {
@@ -8,6 +10,9 @@ const TransportAgencySendDrug = () => {
   const senderName = user[0]?.name;
   const senderAddress = user[0]?.address;
   const senderType = user[0]?.userType;
+  const senderPublicKey = user[0]?.publicKey;
+
+  const navigate = useNavigate();
 
   const [drugDetials, setDrugDetials] = useState([]);
   const [currentTime, setCurrentTime] = useState("");
@@ -18,7 +23,6 @@ const TransportAgencySendDrug = () => {
     console.log("Result: ", decodedResults);
     setDecodedResults(decodedResults?.decodedText);
   };
-
   console.log(decodedResults);
 
   const getCurrentDate = () => {
@@ -33,6 +37,7 @@ const TransportAgencySendDrug = () => {
     event.preventDefault();
     const form = event.target;
     const drugId = form.drugId.value;
+    console.log(drugId);
     fetch(`http://localhost:4000/api/v1/drug-basket/search/${drugId}`)
       .then((res) => res.json())
       .then((result) => {
@@ -63,6 +68,7 @@ const TransportAgencySendDrug = () => {
       senderName,
       senderType,
       senderAddress,
+      senderPublicKey,
       receiverName,
       receiverType,
       receiverAddress,
@@ -76,8 +82,6 @@ const TransportAgencySendDrug = () => {
       senderSignature,
     };
 
-    console.log(SupplyChainObj);
-
     fetch("http://localhost:4000/api/v1/Handoverdata/drug/check", {
       method: "POST",
       headers: {
@@ -90,6 +94,7 @@ const TransportAgencySendDrug = () => {
         if (data === false) {
           toast.error("Drug is not Exist in System");
         } else {
+          console.log(SupplyChainObj);
           fetch("http://localhost:4000/api/v1/drug-supplychain/addHandover", {
             method: "POST",
             headers: {
@@ -100,13 +105,7 @@ const TransportAgencySendDrug = () => {
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
-              // writeData(drugName, drugCode, senderSignature, receiverAddress)
-              //   .then((res) => {
-              //     console.log(res);
-              //   })
-              //   .catch((error) => {
-              //     console.log(error);
-              //   });
+
               toast.success("Drug Handover Data added.");
               form.reset();
             });
@@ -132,8 +131,9 @@ const TransportAgencySendDrug = () => {
               <div className="form-control">
                 <input
                   type="text"
-                  defaultValue={decodedResults}
                   name="drugId"
+                  defaultValue={decodedResults}
+                  required
                   placeholder="Search with Drug Code"
                   className="input input-bordered"
                 />
@@ -152,7 +152,7 @@ const TransportAgencySendDrug = () => {
                   </label>
                   <input
                     type="text"
-                    value={senderName}
+                    defaultValue={senderName}
                     placeholder="Sender Name"
                     className="input input-bordered"
                     disabled
@@ -164,7 +164,7 @@ const TransportAgencySendDrug = () => {
                   </label>
                   <input
                     type="text"
-                    value={senderType}
+                    defaultValue={senderType}
                     placeholder="Sender Name"
                     className="input input-bordered"
                     disabled
@@ -177,7 +177,7 @@ const TransportAgencySendDrug = () => {
                 </label>
                 <input
                   type="text"
-                  value={senderAddress}
+                  defaultValue={senderAddress}
                   placeholder="Sender Address"
                   className="input input-bordered"
                   disabled
@@ -205,7 +205,7 @@ const TransportAgencySendDrug = () => {
                     className="select required select-bordered w-full max-w-xs"
                   >
                     <option disabled>Select Receiver Role</option>
-                    <option value="Distributor">Distributor</option>
+
                     <option value="Ratailer">Ratailer</option>
                     <option value="TransportAgency">TransportAgency</option>
                   </select>
@@ -270,7 +270,6 @@ const TransportAgencySendDrug = () => {
                   <input
                     type="text"
                     name="drugQuantity"
-                    defaultValue={drugDetials[0]?.drugQuantity}
                     placeholder="Drug Quantity"
                     className="input input-bordered"
                   />
@@ -312,7 +311,7 @@ const TransportAgencySendDrug = () => {
                   <input
                     type="text"
                     required
-                    value={currentTime}
+                    defaultValue={currentTime}
                     placeholder="Date & Time"
                     className="input input-bordered"
                   />
@@ -331,8 +330,7 @@ const TransportAgencySendDrug = () => {
                 <label className="input-group">
                   <input
                     type="text"
-                    value={senderSignature}
-                    readOnly
+                    defaultValue={senderSignature}
                     required
                     placeholder="Sender Digital Signature"
                     className="input input-bordered"

@@ -45,6 +45,7 @@ import TransportAgencyViewDrug from "../pages/UserDashboard/TransportAgency/Tran
 import RetailerViewDrug from "../pages/UserDashboard/Retailer/RetailerViewDrug";
 import ManuGenerateQR from "../pages/UserDashboard/Manufacturer/ManuGenerateQR";
 import UpdateProfile from "../pages/Auth/UpdateProfile";
+import RetailerSendDrug from "../pages/UserDashboard/Retailer/RetailerSendDrug";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
       {
         path: "/userlogin",
         element: <UserLogin></UserLogin>,
+      },
+      {
+        path: "/admin-register",
+        element: <AdminRegistration></AdminRegistration>,
       },
     ],
   },
@@ -178,6 +183,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/retailerViewDrug",
         element: <RetailerViewDrug></RetailerViewDrug>,
+      },
+      {
+        path: "/dashboard/retailerSendDrug",
+        element: <RetailerSendDrug></RetailerSendDrug>,
       },
       {
         path: "/dashboard/retailerReceiveHandover",

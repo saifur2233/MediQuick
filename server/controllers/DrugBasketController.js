@@ -76,7 +76,7 @@ exports.addDrugToWallet = catchAsync(async (req, res, next) => {
       .catch((error) => res.status(500).json({ error }));
   }
   if (findDrug) {
-    const quantity = findDrug.drugQuantity + drugQuantity;
+    const quantity = parseInt(findDrug.drugQuantity) + parseInt(drugQuantity);
     const filter = { userAddress: userAddress };
     const update = {
       drugQuantity: quantity,
@@ -108,6 +108,7 @@ exports.getAllDrugsByManufacturer = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllDrugsByDistributor = catchAsync(async (req, res, next) => {
+  const address = req.params.address;
   return Drug.find({
     $and: [
       {
@@ -123,6 +124,7 @@ exports.getAllDrugsByDistributor = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllDrugsByRetailer = catchAsync(async (req, res, next) => {
+  const address = req.params.address;
   return Drug.find({
     $and: [
       {
@@ -138,6 +140,7 @@ exports.getAllDrugsByRetailer = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllDrugsByTransportAgency = catchAsync(async (req, res, next) => {
+  const address = req.params.address;
   return Drug.find({
     $and: [
       {
