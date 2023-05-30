@@ -12,3 +12,11 @@ exports.searchDrugByDrugCode = catchAsync(async (req, res, next) => {
 });
 
 exports.testdata = catchAsync(async (req, res, next) => {});
+
+exports.getDrugJourneyDetails = catchAsync(async (req, res, next) => {
+  const drugCode = req.params.drugCode;
+  return Drug.find({ drugCode })
+    .select("userName userType")
+    .then((info) => res.status(200).send(info))
+    .catch((error) => res.status(500).json({ error }));
+});

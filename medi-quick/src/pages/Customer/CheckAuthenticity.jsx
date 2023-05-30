@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../shared/Loading/Loading";
@@ -6,6 +6,8 @@ import Loading from "../../shared/Loading/Loading";
 const CheckAuthenticity = () => {
   const code = useParams();
   const drugCode = code?.drugCode;
+
+  //const [drugJourneyDetails, SetDrugJourneyDetails] = useState([]);
 
   const { data: drug = [], isLoading } = useQuery({
     queryKey: ["drug"],
@@ -18,10 +20,32 @@ const CheckAuthenticity = () => {
     },
   });
 
-  if (isLoading) {
+  const { data: drugJourneyDetails = [], isloading } = useQuery({
+    queryKey: ["drugJourneyDetails"],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:4000/api/v1/drug-journey/${drugCode}`
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  if (isLoading || isloading) {
     return <Loading></Loading>;
   }
+  // useEffect(() => {
+  //   fetch(`http://localhost:4000/api/v1/drug-journey/${drugCode}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       SetDrugJourneyDetails(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // }, []);
 
+  //console.log(drugJourneyDetails);
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
@@ -39,7 +63,7 @@ const CheckAuthenticity = () => {
                     <h2 className="card-title">
                       Drug Not Found In The System...
                     </h2>
-                    <p className="text-red-500 bg-neutral">
+                    <p className="text-red-500 text-2xl bg-neutral py-4">
                       Please, Check the drug carefully!!!{" "}
                     </p>
                   </>
@@ -61,6 +85,15 @@ const CheckAuthenticity = () => {
                 )}
               </div>
             </div>
+          </div>
+          <div className="py-16">
+            <ul className="steps steps-vertical lg:steps-horizontal">
+              {drugJourneyDetails.map((info, i) => (
+                <li key={info._id} className="step step-primary">
+                  {info?.userName + ` (${info?.userType})`}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
