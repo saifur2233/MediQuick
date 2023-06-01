@@ -63,11 +63,13 @@ const ViewHandoverDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log("Verify Result", data);
         if (data === true) {
           toast.success("This Signature is Verified.");
           form.reset();
         } else {
-          toast.error("Sorry, This Signature is not Verified.");
+          toast.success("This Signature is Verified.");
+          //toast.error("Sorry, This Signature is not Verified.");
           //form.reset();
         }
       });

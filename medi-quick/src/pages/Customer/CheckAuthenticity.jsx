@@ -72,7 +72,7 @@ const CheckAuthenticity = () => {
                     <h2 className="card-title text-2xl text-center">
                       Drug Name: {drug[0]?.drugName}
                     </h2>
-                    <p className="text-green-500 font-bold bg-neutral py-2">
+                    <p className="text-green-500 text-2xl font-bold bg-neutral py-2">
                       Status: Authentic
                     </p>
                     <p>Drug Code: {drug[0]?.drugCode}</p>

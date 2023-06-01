@@ -225,23 +225,23 @@ function generateSinature(address) {
 // Verify a signature
 exports.verifyUserDigitalSignature = catchAsync(async (req, res, next) => {
   const { userAddress, userSignature, userPublicKey } = req.body;
-  console.log(typeof userPublicKey);
+  //console.log(typeof userPublicKey);
   const isValid = ec.verify(userAddress, userSignature, userPublicKey);
   return res.status(200).send(isValid);
 });
 
 function verifySignature(msg, signature, publicKey) {
   const isValid = ec.verify(msg, signature, publicKey);
-  console.log(`Is valid? ${isValid}`);
+  //console.log(`Is valid? ${isValid}`);
 }
-// const signature =
-//   "594702A037C9AC98D0211E35D565D5BEC542A44DDCF557FB5579CA5713F02103C7E3C6C40732A67C3C61C0A1FA8E7E0A3168E7DAF47F84A722595316ABD88302";
-// const publicKey = [
-//   31, 161, 255, 10, 161, 65, 47, 19, 18, 67, 35, 50, 156, 96, 163, 16, 8, 253,
-//   213, 217, 143, 79, 8, 134, 190, 62, 8, 0, 244, 57, 8, 67,
-// ];
-// verifySignature("saif11@gmail.com", signature, publicKey);
-// console.log(typeof publicKey);
+const signature =
+  "594702A037C9AC98D0211E35D565D5BEC542A44DDCF557FB5579CA5713F02103C7E3C6C40732A67C3C61C0A1FA8E7E0A3168E7DAF47F84A722595316ABD88302";
+const publicKey = [
+  31, 161, 255, 10, 161, 65, 47, 19, 18, 67, 35, 50, 156, 96, 163, 16, 8, 253,
+  213, 217, 143, 79, 8, 134, 190, 62, 8, 0, 244, 57, 8, 67,
+];
+verifySignature("saif11@gmail.com", signature, publicKey);
+//console.log(typeof publicKey);
 exports.getAllUserInfo = catchAsync(async (req, res, next) => {
   return User.find({
     userType: {

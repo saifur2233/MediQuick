@@ -68,7 +68,7 @@ const RetailerViewDrug = () => {
                     <td>{drug?.expDate}</td>
                     <td>
                       <div className="flex gap-2">
-                        <button
+                        {/* <button
                           onClick={() =>
                             navigate(`/dashboard/viewDrugDetails/${drug?._id}`)
                           }
@@ -87,7 +87,7 @@ const RetailerViewDrug = () => {
                               d="M13 10V3L4 14h7v7l9-11h-7z"
                             ></path>
                           </svg>
-                        </button>
+                        </button> */}
                         <button
                           onClick={() => handleDeleteDrug(drug)}
                           className="btn btn-square btn-error btn-outline"
