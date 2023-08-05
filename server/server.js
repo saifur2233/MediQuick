@@ -3,7 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const mongoose = require("mongoose");
-const config = require("./dbconfig/dbConfig");
+const config = require("./dbconfig/dbConfig.js");
 const AuthRoute = require("./routes/AuthRoute");
 const AdminRoute = require("./routes/AdminRoute");
 const UserRoute = require("./routes/UserRoute");

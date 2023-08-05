@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSun } from "react-icons/fa";
 import { AuthContext } from "../../context/UserContext";
 
 const Header = () => {
+  const navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
 
   const [dark, setDark] = useState(false);
